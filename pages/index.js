@@ -16,6 +16,7 @@ function Home() {
       <h1>Welcome {user.displayName}! </h1>
       <h4> We are thrilled to have you return to our community of knowledge sharers. Ready to pick up where you left off and explore even more skill-swapping opportunities?</h4>
     </div>
+
   );
 }
 

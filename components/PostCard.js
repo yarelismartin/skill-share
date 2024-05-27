@@ -79,7 +79,7 @@ PostCard.propTypes = {
   postObj: PropTypes.shape({
     title: PropTypes.string,
     content: PropTypes.string,
-    timestamp: PropTypes.number,
+    timestamp: PropTypes.string,
     firebaseKey: PropTypes.string,
   }).isRequired,
   onUpdate: PropTypes.func.isRequired,

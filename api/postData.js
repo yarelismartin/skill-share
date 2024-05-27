@@ -2,7 +2,7 @@ import { clientCredentials } from '../utils/client';
 
 const endpoint = clientCredentials.databaseURL;
 
-const getAllPosts = () => new Promise((resolve, reject) => {
+const allPosts = () => new Promise((resolve, reject) => {
   fetch(`${endpoint}/posts.json`, {
     method: 'GET',
     headers: {
@@ -59,7 +59,7 @@ const deletePost = (firebaseKey) => new Promise((resolve, reject) => {
 });
 
 export {
-  getAllPosts,
+  allPosts,
   deletePost,
   createPost,
   updatePost,
