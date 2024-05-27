@@ -1,8 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { deletePost } from '../api/postData';
 
-export default function PostCard({ postObj }) {
+export default function PostCard({ postObj, onUpdate }) {
   const [isDropdownVisible, setDropdownVisible] = useState(false);
   // State variable for menu visibility, initially hidden
 
@@ -10,6 +11,12 @@ export default function PostCard({ postObj }) {
     setDropdownVisible(!isDropdownVisible);
   };
   // Function to toggle menu visibility, It doesn't perform a strict logical NOT operation, but rather flips the current value of the state variable to its opposite value without explicitly checking its current state.
+
+  const deleteAPost = () => {
+    if (window.confirm('Are you sure you want to delete this post?')) {
+      deletePost(postObj.firebaseKey).then(onUpdate);
+    }
+  };
 
   return (
     <div>
@@ -38,13 +45,12 @@ export default function PostCard({ postObj }) {
                 </svg>
                 Edit Post
               </button>
-              <button type="button" className="dropdown-item delete">
+              <button type="button" className="dropdown-item delete" onClick={deleteAPost}>
                 <span>
                   <svg width="15" height="15" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path fillRule="evenodd" clipRule="evenodd" d="M8 1V0H4V1H1V3H11V1H8ZM9.33333 12L10 4H2L2.66667 12H9.33333Z" fill="black" />
                   </svg>
                 </span>
-
                 Delete
               </button>
             </div>
@@ -74,5 +80,7 @@ PostCard.propTypes = {
     title: PropTypes.string,
     content: PropTypes.string,
     timestamp: PropTypes.number,
+    firebaseKey: PropTypes.string,
   }).isRequired,
+  onUpdate: PropTypes.func.isRequired,
 };
