@@ -20,3 +20,115 @@ a {
 body {
   background-color: #88effd;
 }
+
+.post-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  width: 100%;
+  max-width: 700px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 16px auto;
+  position: relative;
+  
+}
+
+.card-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+  position: relative;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 12px;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-name {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.time-created {
+  font-size: 12px;
+  color: #888;
+}
+
+.menu-container {
+  margin-left: auto;
+  position: relative;
+  padding: 1px 1px;
+  &:hover {
+    background-color: #E5E5E5; /* Sets a transparent grey background on hover */ 
+    border-radius: 10px;
+  }
+}
+
+.menu-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 1px;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 26px; /* Positioned below the menu button */
+  right: 0; /* Aligned to the right edge of the menu button */
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  width: 120px;
+  z-index: 10; /* Ensures the dropdown is above other elements */
+}
+
+.dropdown-item {
+  display: block;
+  padding: 8px 12px;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown-item svg {
+  margin-right: 8px; /* Adjust the value as needed */
+}
+
+.dropdown-item.delete {
+  color: red; /* Specific styling for the delete item to make text red */
+}
+
+.card-content {
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+
+.card-footer {
+  font-size: 14px;
+  font-weight: bold;
+  color: #666;
+}
+
+.comment {
+  display: flex;
+  align-items: center;
+}
