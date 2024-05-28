@@ -9,7 +9,9 @@ export default function Community() {
   const router = useRouter();
 
   const getAllPost = async () => {
-    await allPosts().then(setPosts);
+    const fetchedPosts = await allPosts();
+    const sortedPosts = fetchedPosts.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+    setPosts(sortedPosts);
   };
 
   useEffect(() => {

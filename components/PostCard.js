@@ -1,10 +1,14 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { formatDistanceToNow } from 'date-fns';
+import { useRouter } from 'next/router';
 import { deletePost } from '../api/postData';
 
 export default function PostCard({ postObj, onUpdate }) {
   const [isDropdownVisible, setDropdownVisible] = useState(false);
+  const router = useRouter();
   // State variable for menu visibility, initially hidden
 
   const toggleDropdown = () => {
@@ -26,7 +30,7 @@ export default function PostCard({ postObj, onUpdate }) {
           {/* <img className="avatar" src="/profile-pic.jpg" src={profileObj.image} alt="User Avatar" /> */}
           <div className="user-info">
             {/* <span className="user-name">{profileObj.name}</span> */}
-            <span className="time-created">{postObj.timestamp}</span>
+            <span className="time-created">{formatDistanceToNow(new Date(postObj.timestamp), { addSuffix: true })}</span>
           </div>
           <div className="menu-container">
             <button type="button" className="menu-button" onClick={toggleDropdown} aria-label="Open options menu">
@@ -39,7 +43,7 @@ export default function PostCard({ postObj, onUpdate }) {
             </button>
             {isDropdownVisible && (
             <div className="dropdown-menu" style={{ display: 'block' }}>
-              <button type="button" className="dropdown-item">
+              <button type="button" className="dropdown-item" onClick={() => { router.push(`/post/edit/${postObj.firebaseKey}`); }}>
                 <svg width="15" height="15" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path fillRule="evenodd" clipRule="evenodd" d="M11.7029 1.87868L10.1171 0.292893C9.72658 -0.0976311 9.09342 -0.0976311 8.70289 0.292893L7.499 1.495L10.499 4.495L11.7029 3.29289C12.0934 2.90237 12.0934 2.2692 11.7029 1.87868ZM9.085 5.909L6.085 2.909L0 8.995V12H2.994L9.085 5.909Z" fill="black" />
                 </svg>
