@@ -93,15 +93,6 @@ function PostForm({ postObj }) {
             onChange={handleChange}
           />
         </Form.Group>
-        <Form.Group controlId="formFile" className="mb-3">
-          <Form.Label>Default file input example</Form.Label>
-          <Form.Control
-            type="file"
-            name="image"
-            value={formInput.image}
-            onChange={handleChange}
-          />
-        </Form.Group>
 
         <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
           <Form.Label>... </Form.Label>

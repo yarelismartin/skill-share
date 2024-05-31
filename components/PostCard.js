@@ -1,15 +1,19 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { formatDistanceToNow } from 'date-fns';
 import { useRouter } from 'next/router';
 import { deletePost } from '../api/postData';
+import { useAuth } from '../utils/context/authContext';
 
 export default function PostCard({ postObj, onUpdate }) {
-  const [isDropdownVisible, setDropdownVisible] = useState(false);
+  const [isDropdownVisible, setDropdownVisible] = useState(false); // State variable for menu visibility, initially hidden
   const router = useRouter();
-  // State variable for menu visibility, initially hidden
+  const { user } = useAuth();
+  const [imageClass, setImageClass] = useState(''); // State to store the class based on the image aspect ratio
+  // By using useRef and its current property, you can maintain a persistent reference to a DOM element and perform necessary manipulations or checks after the component has been rendered.
+  const imageRef = useRef(null); // Ref to access the image DOM element
 
   const toggleDropdown = () => {
     setDropdownVisible(!isDropdownVisible);
@@ -22,6 +26,21 @@ export default function PostCard({ postObj, onUpdate }) {
     }
   };
 
+  // Effect to determine the aspect ratio of the image once it's loaded
+  useEffect(() => {
+    if (imageRef.current) { // Check if the imageRef is attached to an image element(imageRef.current is not null.)
+      const img = imageRef.current; // imageRef.current now points to the actual DOM element rendered by the <img> tag.
+      img.onload = () => { // The onload event fires when the image has completely loaded, meaning all image data is available.
+        const aspectRatio = img.naturalWidth / img.naturalHeight;
+        if (aspectRatio > 1) { // If the aspect ratio is greater than 1, the image is wider than it is tall (horizontal).
+          setImageClass('horizontal');
+        } else {
+          setImageClass('vertical'); // If the aspect ratio is less than or equal to 1, the image is as tall or taller than it is wide (vertical).
+        }
+      };
+    }
+  }, [postObj.image]);
+
   return (
     <div>
       <div className="post-card">
@@ -32,6 +51,7 @@ export default function PostCard({ postObj, onUpdate }) {
             {/* <span className="user-name">{profileObj.name}</span> */}
             <span className="time-created">{formatDistanceToNow(new Date(postObj.timestamp), { addSuffix: true })}</span>
           </div>
+          {postObj.uid === user.uid && (
           <div className="menu-container">
             <button type="button" className="menu-button" onClick={toggleDropdown} aria-label="Open options menu">
               <svg width="27" height="27" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -60,6 +80,11 @@ export default function PostCard({ postObj, onUpdate }) {
             </div>
             )}
           </div>
+          )}
+
+        </div>
+        <div className={`card-image ${imageClass}`}>
+          <img src={postObj.image} alt="" ref={imageRef} />
         </div>
         <div className="card-content">
           <p>{postObj.content}
@@ -85,6 +110,8 @@ PostCard.propTypes = {
     content: PropTypes.string,
     timestamp: PropTypes.string,
     firebaseKey: PropTypes.string,
+    uid: PropTypes.string,
+    image: PropTypes.string,
   }).isRequired,
   onUpdate: PropTypes.func.isRequired,
 };
