@@ -1,70 +1,134 @@
-// import React, { useState } from 'react';
-// import { Form } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import { Button, Form } from 'react-bootstrap';
+import PropTypes from 'prop-types';
+import { useRouter } from 'next/router';
+import { createPost, updatePost } from '../../api/postData';
+import { useAuth } from '../../utils/context/authContext';
+import getCategories from '../../api/categoryDate';
 
-// export default function PostForm({ postObj }) {
-//   const [formInput, setFormInput] = useState();
+const initialValue = {
+  title: '',
+  image: '',
+  content: '',
+};
 
-//   return (
-//     <div>
-//       <Form onSubmit={handleSubmit}>
-//         <h2>{postObj.firebaseKey ? 'Update' : 'Create'} Post</h2>
+function PostForm({ postObj }) {
+  const [formInput, setFormInput] = useState(initialValue);
+  const [selectCategory, setSelectCategory] = useState([]);
+  const { user } = useAuth();
+  const router = useRouter();
 
-//         {/* <Select Category/> */}
-//         <Form.Label>Category</Form.Label>
-//         <Form.Select
-//           name="category"
-//           value={formInput.category_id}
-//           onChange={handleChange}
-//           required="true"
-//         >
-//           <option value="" hidden>Choose a categpry</option>
-//           {selectCategory.map((category) => (
-//             <option
-//               key={category.firebaseKey}
-//               value={category.firebaseKey}
-//             >{category.name}
-//             </option>
-//           ))}
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormInput((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
 
-//         </Form.Select>
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (postObj.firebaseKey) {
+      updatePost(formInput).then(() => router.push('/community'));
+    } else {
+      const payload = { ...formInput, uid: user.uid, timestamp: new Date() };
+      console.warn(payload);
+      createPost(payload).then(({ name }) => {
+        const patchPayload = { firebaseKey: name };
+        updatePost(patchPayload).then(() => router.push('/community'));
+      });
+    }
+  };
 
-//         {/* TITLE INPUT  */}
-//         <Form.Group className="mb-3">
-//           <Form.Label>Title</Form.Label>
-//           <Form.Control
-//             type="text"
-//             placeholder="Post Title..."
-//             name="title"
-//             value={formInput.title}
-//             onChange={handleChange}
-//             required
-//           />
-//         </Form.Group>
+  useEffect(() => {
+    getCategories().then(setSelectCategory);
+    if (postObj?.firebaseKey) setFormInput(postObj);
+  }, [postObj]);
 
-//         <Form.Group className="mb-3">
-//           <Form.Label>Position</Form.Label>
-//           <Form.Control
-//             type="text"
-//             placeholder="Player's Position..."
-//             name="position"
-//             value={formInput.position}
-//             onChange={handleChange}
-//             required
-//           />
-//         </Form.Group>
-//         <Form.Group className="mb-3">
-//           <Form.Label>Image</Form.Label>
-//           <Form.Control
-//             type="text"
-//             placeholder="Eneter a image address of player"
-//             name="image"
-//             value={formInput.image}
-//             onChange={handleChange}
-//             required
-//           />
-//         </Form.Group>
-//         <Button style={{ marginTop: '15px' }} type="submit">{memObj.firebaseKey ? 'Update' : 'Create'} Memeber</Button>
-//       </Form>
-//     </div>
-//   );
-// }
+  console.warn(selectCategory);
+
+  return (
+    <div>
+      <Form onSubmit={handleSubmit}>
+        <h2>{postObj.firebaseKey ? 'Update' : 'Create'} Post</h2>
+
+        {/* <Select Category/> */}
+        <Form.Label>Category</Form.Label>
+        <Form.Select
+          name="category_id"
+          value={formInput.category_id}
+          onChange={handleChange}
+          required
+        >
+          <option value="" hidden>Choose a categpry</option>
+          {selectCategory?.map((category) => (
+            <option
+              key={category.firebaseKey}
+              value={category.firebaseKey}
+            >{category.category_name}
+            </option>
+          ))}
+
+        </Form.Select>
+
+        {/* TITLE INPUT  */}
+        <Form.Group className="mb-3">
+          <Form.Label>Title</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Post Title..."
+            name="title"
+            value={formInput.title}
+            onChange={handleChange}
+            required
+          />
+        </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Label>Image</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Attach an image URL address"
+            name="image"
+            value={formInput.image}
+            onChange={handleChange}
+          />
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+          <Form.Label>... </Form.Label>
+          <Form.Control
+            as="textarea"
+            rows={7}
+            placeholder="What would you like to share?"
+            name="content"
+            value={formInput.content}
+            onChange={handleChange}
+          />
+        </Form.Group>
+
+        <Button style={{ marginTop: '15px' }} type="submit">
+          <svg style={{ marginRight: '8px' }} width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M11.9167 1.58334L5.95834 7.54168" stroke="white" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M11.9167 1.58334L8.125 12.4167L5.95834 7.54168L1.08334 5.37501L11.9167 1.58334Z" stroke="white" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+          {postObj.firebaseKey ? 'Update' : ''} Post
+        </Button>
+      </Form>
+    </div>
+  );
+}
+
+PostForm.propTypes = {
+  postObj: PropTypes.shape({
+    firebaseKey: PropTypes.string,
+    title: PropTypes.string,
+    image: PropTypes.string,
+    content: PropTypes.string,
+  }),
+};
+
+PostForm.defaultProps = {
+  postObj: initialValue,
+};
+
+export default PostForm;

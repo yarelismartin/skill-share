@@ -1,11 +1,19 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { formatDistanceToNow } from 'date-fns';
+import { useRouter } from 'next/router';
 import { deletePost } from '../api/postData';
+import { useAuth } from '../utils/context/authContext';
 
 export default function PostCard({ postObj, onUpdate }) {
-  const [isDropdownVisible, setDropdownVisible] = useState(false);
-  // State variable for menu visibility, initially hidden
+  const [isDropdownVisible, setDropdownVisible] = useState(false); // State variable for menu visibility, initially hidden
+  const router = useRouter();
+  const { user } = useAuth();
+  const [imageClass, setImageClass] = useState(''); // State to store the class based on the image aspect ratio
+  // By using useRef and its current property, you can maintain a persistent reference to a DOM element and perform necessary manipulations or checks after the component has been rendered.
+  const imageRef = useRef(null); // Ref to access the image DOM element
 
   const toggleDropdown = () => {
     setDropdownVisible(!isDropdownVisible);
@@ -18,6 +26,21 @@ export default function PostCard({ postObj, onUpdate }) {
     }
   };
 
+  // Effect to determine the aspect ratio of the image once it's loaded
+  useEffect(() => {
+    if (imageRef.current) { // Check if the imageRef is attached to an image element(imageRef.current is not null.)
+      const img = imageRef.current; // imageRef.current now points to the actual DOM element rendered by the <img> tag.
+      img.onload = () => { // The onload event fires when the image has completely loaded, meaning all image data is available.
+        const aspectRatio = img.naturalWidth / img.naturalHeight;
+        if (aspectRatio > 1) { // If the aspect ratio is greater than 1, the image is wider than it is tall (horizontal).
+          setImageClass('horizontal');
+        } else {
+          setImageClass('vertical'); // If the aspect ratio is less than or equal to 1, the image is as tall or taller than it is wide (vertical).
+        }
+      };
+    }
+  }, [postObj.image]);
+
   return (
     <div>
       <div className="post-card">
@@ -26,8 +49,9 @@ export default function PostCard({ postObj, onUpdate }) {
           {/* <img className="avatar" src="/profile-pic.jpg" src={profileObj.image} alt="User Avatar" /> */}
           <div className="user-info">
             {/* <span className="user-name">{profileObj.name}</span> */}
-            <span className="time-created">{postObj.timestamp}</span>
+            <span className="time-created">{formatDistanceToNow(new Date(postObj.timestamp), { addSuffix: true })}</span>
           </div>
+          {postObj.uid === user.uid && (
           <div className="menu-container">
             <button type="button" className="menu-button" onClick={toggleDropdown} aria-label="Open options menu">
               <svg width="27" height="27" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -39,7 +63,7 @@ export default function PostCard({ postObj, onUpdate }) {
             </button>
             {isDropdownVisible && (
             <div className="dropdown-menu" style={{ display: 'block' }}>
-              <button type="button" className="dropdown-item">
+              <button type="button" className="dropdown-item" onClick={() => { router.push(`/post/edit/${postObj.firebaseKey}`); }}>
                 <svg width="15" height="15" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path fillRule="evenodd" clipRule="evenodd" d="M11.7029 1.87868L10.1171 0.292893C9.72658 -0.0976311 9.09342 -0.0976311 8.70289 0.292893L7.499 1.495L10.499 4.495L11.7029 3.29289C12.0934 2.90237 12.0934 2.2692 11.7029 1.87868ZM9.085 5.909L6.085 2.909L0 8.995V12H2.994L9.085 5.909Z" fill="black" />
                 </svg>
@@ -56,6 +80,11 @@ export default function PostCard({ postObj, onUpdate }) {
             </div>
             )}
           </div>
+          )}
+
+        </div>
+        <div className={`card-image ${imageClass}`}>
+          <img src={postObj.image} alt="" ref={imageRef} />
         </div>
         <div className="card-content">
           <p>{postObj.content}
@@ -81,6 +110,8 @@ PostCard.propTypes = {
     content: PropTypes.string,
     timestamp: PropTypes.string,
     firebaseKey: PropTypes.string,
+    uid: PropTypes.string,
+    image: PropTypes.string,
   }).isRequired,
   onUpdate: PropTypes.func.isRequired,
 };

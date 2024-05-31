@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { Button } from 'react-bootstrap';
@@ -9,7 +10,9 @@ export default function Community() {
   const router = useRouter();
 
   const getAllPost = async () => {
-    await allPosts().then(setPosts);
+    const fetchedPosts = await allPosts();
+    const sortedPosts = fetchedPosts.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+    setPosts(sortedPosts);
   };
 
   useEffect(() => {
