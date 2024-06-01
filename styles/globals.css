@@ -1,11 +1,16 @@
 @import 'bootstrap/dist/css/bootstrap.css';
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
 
 html,
 body {
   padding: 0;
   margin: 0;
+  height: 100%;
+  overflow: hidden;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+
 }
 
 a {
@@ -161,4 +166,71 @@ body {
 
 .card-image.vertical img {
   object-fit: contain;
+}
+
+/* styling for the whole product list container, including the filters on the side */
+.product-list-container {
+  display: flex;
+  height: 150vh; 
+}
+
+
+.products-container {
+  flex: 1;
+  overflow-y: auto; /* Enable scrolling for the content area */
+  padding: 10px;
+  height: 87vh;
+  margin-top: 20px;
+}
+
+/* styling for the filters */
+.filter-wrapper {
+  padding: 10px;
+  background-color: #FFFFFF;
+  width: 220px; /* Adjust as needed */
+  font-family: "Roboto", sans-serif;
+  font-style: normal
+
+}
+
+.filter-title {
+  font-weight: 500;
+  color: #808080;
+}
+
+.filter-data {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.filter-item {
+  margin: 8px 16px;
+}
+
+.filter-item p {
+  font-weight: 500 ;
+  font-size: 14px;
+  color: #000000;
+}
+
+/* Hide scrollbar track */
+::-webkit-scrollbar {
+  width: 10px; /* Set the width of the scrollbar */
+}
+
+/* Style the scrollbar thumb */
+::-webkit-scrollbar-thumb {
+  background: rgba(85, 85, 85, 0.5); /* Set the color of the scrollbar thumb */
+  border-radius: 10px; /* Set the radius of the scrollbar thumb */
+}
+
+/* Style the scrollbar track */
+::-webkit-scrollbar-track {
+  background: transparent; /* Set the color of the scrollbar track */
+}
+
+/* Style the scrollbar corner */
+::-webkit-scrollbar-corner {
+  background: transparent; /* Set the color of the scrollbar corner */
 }

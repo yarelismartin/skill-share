@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { Button } from 'react-bootstrap';
 import PostCard from '../components/PostCard';
 import { allPosts } from '../api/postData';
+import Menu from '../components/Menu';
 
 export default function Community() {
   const [posts, setPosts] = useState([]);
@@ -20,11 +21,14 @@ export default function Community() {
   }, []);
 
   return (
-    <div>
-      <Button type="button" onClick={() => { router.push('/post/new'); }}>Create A Post</Button>
-      {posts.map((post) => (
-        <PostCard key={post.firebaseKey} postObj={post} onUpdate={getAllPost} />
-      ))}
+    <div className="product-list-container">
+      <Menu />
+      <section className="products-container">
+        <Button type="button" onClick={() => { router.push('/post/new'); }}>Create A Post</Button>
+        {posts.map((post) => (
+          <PostCard key={post.firebaseKey} postObj={post} onUpdate={getAllPost} />
+        ))}
+      </section>
     </div>
   );
 }
