@@ -1,13 +1,22 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { Button } from 'react-bootstrap';
 import PostCard from '../components/PostCard';
-import { allPosts } from '../api/postData';
+import { allPosts, getPostByCategory } from '../api/postData';
+import Menu from '../components/Menu';
+import getCategories from '../api/categoryDate';
 
 export default function Community() {
   const [posts, setPosts] = useState([]);
+  const [category, setCategory] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState(null);
   const router = useRouter();
+
+  const getAllCategories = () => {
+    getCategories().then(setCategory);
+  };
 
   const getAllPost = async () => {
     const fetchedPosts = await allPosts();
@@ -15,16 +24,30 @@ export default function Community() {
     setPosts(sortedPosts);
   };
 
+  const postByCategory = async () => {
+    if (selectedCategory) {
+      const postForCategory = await getPostByCategory(selectedCategory);
+      const sortedCategpryPosts = postForCategory.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+      setPosts(sortedCategpryPosts);
+    } else {
+      getAllPost();
+    }
+  };
+
   useEffect(() => {
-    getAllPost();
-  }, []);
+    postByCategory(selectedCategory);
+    getAllCategories();
+  }, [selectedCategory]);
 
   return (
-    <div>
-      <Button type="button" onClick={() => { router.push('/post/new'); }}>Create A Post</Button>
-      {posts.map((post) => (
-        <PostCard key={post.firebaseKey} postObj={post} onUpdate={getAllPost} />
-      ))}
+    <div className="product-list-container">
+      <Menu categories={category} onSelectCategory={setSelectedCategory} />
+      <section className="products-container">
+        <Button type="button" onClick={() => { router.push('/post/new'); }}>Create A Post</Button>
+        {posts.map((post) => (
+          <PostCard key={post.firebaseKey} postObj={post} onUpdate={postByCategory} />
+        ))}
+      </section>
     </div>
   );
 }

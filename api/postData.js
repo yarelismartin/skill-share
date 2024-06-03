@@ -70,10 +70,23 @@ const getSinglePost = (firebaseKey) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const getPostByCategory = (firebaseKey) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/posts.json?orderBy="category_id"&equalTo="${firebaseKey}"`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => resolve(Object.values(data)))
+    .catch(reject);
+});
+
 export {
   allPosts,
   deletePost,
   createPost,
   updatePost,
   getSinglePost,
+  getPostByCategory,
 };

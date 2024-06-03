@@ -83,6 +83,8 @@ function PostForm({ postObj }) {
             required
           />
         </Form.Group>
+
+        {/* IMAGE INPUT  */}
         <Form.Group className="mb-3">
           <Form.Label>Image</Form.Label>
           <Form.Control
@@ -94,6 +96,7 @@ function PostForm({ postObj }) {
           />
         </Form.Group>
 
+        {/* CONTENT INPUT  */}
         <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
           <Form.Label>... </Form.Label>
           <Form.Control
