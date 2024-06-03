@@ -23,7 +23,7 @@ a {
 }
 
 body {
-  background-color: #88effd;
+  background-color: #E5E5E5;
 }
 
 .post-card {
@@ -189,12 +189,12 @@ body {
   background-color: #FFFFFF;
   width: 220px; /* Adjust as needed */
   font-family: "Roboto", sans-serif;
-  font-style: normal
+  font-style: normal;
 
 }
 
 .filter-title {
-  font-weight: 500;
+  font-weight: 700;
   color: #808080;
 }
 
@@ -209,7 +209,7 @@ body {
 }
 
 .filter-item p {
-  font-weight: 500 ;
+  font-weight: 700 ;
   font-size: 14px;
   color: #000000;
 }
