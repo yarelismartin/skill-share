@@ -117,7 +117,7 @@ function PostForm({ postObj }) {
     </div>
   );
 }
-
+/* reached mvp */
 PostForm.propTypes = {
   postObj: PropTypes.shape({
     firebaseKey: PropTypes.string,
