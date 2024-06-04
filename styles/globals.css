@@ -205,13 +205,12 @@ body {
 }
 
 .filter-item {
-  margin: 8px 16px;
-}
-
-.filter-item p {
+  border: none;
+  background-color: inherit;
   font-weight: 700 ;
   font-size: 14px;
   color: #000000;
+
 }
 
 /* Hide scrollbar track */
