@@ -32,7 +32,6 @@ function PostForm({ postObj }) {
       updatePost(formInput).then(() => router.push('/community'));
     } else {
       const payload = { ...formInput, uid: user.uid, timestamp: new Date() };
-      console.warn(payload);
       createPost(payload).then(({ name }) => {
         const patchPayload = { firebaseKey: name };
         updatePost(patchPayload).then(() => router.push('/community'));
@@ -44,8 +43,6 @@ function PostForm({ postObj }) {
     getCategories().then(setSelectCategory);
     if (postObj?.firebaseKey) setFormInput(postObj);
   }, [postObj]);
-
-  console.warn(selectCategory);
 
   return (
     <div>

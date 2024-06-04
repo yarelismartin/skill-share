@@ -43,7 +43,6 @@ export default function Community() {
     <div className="product-list-container">
       <Menu categories={category} onSelectCategory={setSelectedCategory} />
       <section className="products-container">
-        <Button type="button" onClick={() => { router.push('/post/new'); }}>Create A Post</Button>
         {posts.map((post) => (
           <PostCard key={post.firebaseKey} postObj={post} onUpdate={postByCategory} />
         ))}
