@@ -1,7 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 import React from 'react';
+import PropTypes from 'prop-types';
 
-export default function ProfileCard() {
+export default function ProfileCard({ profileObj }) {
   return (
     <div style={{
       width: '256px', height: '327px', backgroundColor: '#D9D9D9', borderRadius: '10%', display: 'flex', alignItems: 'center', flexDirection: 'column',
@@ -11,14 +12,14 @@ export default function ProfileCard() {
         style={{
           width: '100px', height: '100px', borderRadius: '80%', marginTop: '20px',
         }}
-        src="/profile-pic.jpg"
+        src={profileObj.image}
         alt="profile-pic"
       />
       </div>
-      <header style={{ fontSize: '20px' }}>Name</header>
-      <p style={{ fontSize: '13px' }}>Roller Skating</p>
-      <p style={{ fontSize: '13px' }}>Location: Nashville</p>
-      <p style={{ fontSize: '13px' }}>Learning Preference: In Person</p>
+      <header style={{ fontSize: '20px' }}>{profileObj.name}</header>
+      <p style={{ fontSize: '13px' }}>{profileObj.skill}</p>
+      <p style={{ fontSize: '13px' }}>Location: {profileObj.location}</p>
+      <p style={{ fontSize: '13px' }}>Learning Preference: {profileObj.learning_preference}</p>
       <div>
         <button
           type="button"
@@ -45,3 +46,13 @@ export default function ProfileCard() {
     </div>
   );
 }
+
+ProfileCard.propTypes = {
+  profileObj: PropTypes.shape({
+    name: PropTypes.string,
+    image: PropTypes.string,
+    learning_preference: PropTypes.string,
+    location: PropTypes.string,
+    skill: PropTypes.string,
+  }).isRequired,
+};
