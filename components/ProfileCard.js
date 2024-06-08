@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 export default function ProfileCard({ profileObj }) {
   return (
     <div style={{
-      width: '256px', height: '327px', backgroundColor: '#D9D9D9', borderRadius: '10%', display: 'flex', alignItems: 'center', flexDirection: 'column',
+      width: '256px', height: '327px', backgroundColor: '#D9D9D9', borderRadius: '10%', display: 'flex', alignItems: 'center', flexDirection: 'column', margin: '20px',
     }}
     >
       <div><img

@@ -233,3 +233,7 @@ body {
 ::-webkit-scrollbar-corner {
   background: transparent; /* Set the color of the scrollbar corner */
 }
+
+.input-form {
+  margin: 20px;
+}

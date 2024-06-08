@@ -50,27 +50,27 @@ function PostForm({ postObj }) {
         <h2>{postObj.firebaseKey ? 'Update' : 'Create'} Post</h2>
 
         {/* <Select Category/> */}
-        <Form.Label>Category</Form.Label>
-        <Form.Select
-          name="category_id"
-          value={formInput.category_id}
-          onChange={handleChange}
-          required
-        >
-          <option value="" hidden>Choose a categpry</option>
-          {selectCategory?.map((category) => (
-            <option
-              key={category.firebaseKey}
-              value={category.firebaseKey}
-            >{category.category_name}
-            </option>
-          ))}
+        <Form.Group className="input-form">
+          <Form.Select
+            name="category_id"
+            value={formInput.category_id}
+            onChange={handleChange}
+            required
+          >
+            <option value="" hidden>Choose a categpry</option>
+            {selectCategory?.map((category) => (
+              <option
+                key={category.firebaseKey}
+                value={category.firebaseKey}
+              >{category.category_name}
+              </option>
+            ))}
 
-        </Form.Select>
+          </Form.Select>
+        </Form.Group>
 
         {/* TITLE INPUT  */}
-        <Form.Group className="mb-3">
-          <Form.Label>Title</Form.Label>
+        <Form.Group className="mb-3 input-form">
           <Form.Control
             type="text"
             placeholder="Post Title..."
@@ -82,8 +82,7 @@ function PostForm({ postObj }) {
         </Form.Group>
 
         {/* IMAGE INPUT  */}
-        <Form.Group className="mb-3">
-          <Form.Label>Image</Form.Label>
+        <Form.Group className="mb-3 input-form">
           <Form.Control
             type="text"
             placeholder="Attach an image URL address"
@@ -94,8 +93,7 @@ function PostForm({ postObj }) {
         </Form.Group>
 
         {/* CONTENT INPUT  */}
-        <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-          <Form.Label>... </Form.Label>
+        <Form.Group className="mb-3 input-form" controlId="exampleForm.ControlTextarea1">
           <Form.Control
             as="textarea"
             rows={7}
