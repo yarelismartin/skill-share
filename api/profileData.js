@@ -66,6 +66,22 @@ const updateProfile = (payload) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const getSingleProfile = (uid) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/profiles.json?orderBy="uid"&equalTo="${uid}"`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      //  : Since we know there is only one profile, we can directly access the first (and only) element in this array using [0]. Hence, Object.values(data)[0] will give you the profile object
+      const profile = data ? Object.values(data)[0] : null;
+      resolve(profile);
+    })
+    .catch(reject);
+});
+
 export {
-  getAllOtherProfiles, createProfile, updateProfile, allProfiles,
+  getAllOtherProfiles, createProfile, updateProfile, allProfiles, getSingleProfile,
 };
