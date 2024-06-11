@@ -39,6 +39,13 @@ export default function Community() {
     getAllCategories();
   }, [selectedCategory]);
 
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, []);
+
   return (
     <div className="product-list-container">
       <Menu categories={category} onSelectCategory={setSelectedCategory} />
