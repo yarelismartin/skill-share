@@ -44,6 +44,7 @@ export default function ProfileCard({ profileObj }) {
           : (
             <button
               type="button"
+              onClick={() => router.push(`profile/${profileObj.uid}`)}
               style={{
                 color: 'white', fontSize: '10px', width: '130px', height: '30px', backgroundColor: '#3F525B', border: 'none', borderRadius: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', margin: '15px', padding: '10px',
               }}
