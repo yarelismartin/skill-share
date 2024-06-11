@@ -105,11 +105,12 @@ export default function ProfileForm({ profileObj }) {
             rows={10}
             placeholder="Tell us about yourself..."
             name="bio"
-            value={formInput.content}
+            value={formInput.bio}
             onChange={handleChange}
             required
           />
         </Form.Group>
+
         <Button type="submit">{profileObj.firebaseKey ? 'Update' : 'Create'} Profile </Button>
       </Form>
     </div>
