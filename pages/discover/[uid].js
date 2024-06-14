@@ -1,15 +1,15 @@
 import React from 'react';
-import ProfileTab from '../../components/ProfileTab';
 import Bio from '../../components/Bio';
 import Review from '../../components/Review';
+import Tab from '../../components/Tab';
 
 export default function ProfileDeatil() {
   return (
     <div>
-      <ProfileTab>
+      <Tab>
         <Bio label="Bio" />
         <Review label="Review" />
-      </ProfileTab>
+      </Tab>
     </div>
   );
 }

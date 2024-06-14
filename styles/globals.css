@@ -1,5 +1,6 @@
 @import 'bootstrap/dist/css/bootstrap.css';
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;1,300;1,400&display=swap');
 
 
 html,
@@ -238,10 +239,119 @@ body {
   margin: 20px;
 }
 
-.tab-button:hover{
+.tab-button {
   border-bottom: 0; 
   border-radius: 8px 8px 0px 0px;
-  border-width: 1.8px !important; 
+  border-width: 2px !important; 
   border-color: black; 
   padding: 10px 15px;
+}
+
+.tab {
+  margin: 20px;
+  max-width: 1000px;
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* width: '40%', borderWidth: '1.8px', alignContent: 'center', display: 'block', marginLeft: 'auto', marginRight: 'auto', marginTop: '50px' */
+
+.tab .tab-headers {
+  display: flex;
+  flex-wrap: wrap;
+  border-bottom: 1.4px solid black;
+}
+
+.tab .tab-headers .tab-header {
+  position: relative;
+  padding: 0px 18px;
+  height: 40px;
+  line-height: 50px;
+  z-index: 2;
+  cursor: pointer;
+  color: #222;
+  border-radius: 8px 8px 0px 0px;
+  border-width: 1.4px !important;
+  font-family: Poppins, sans-serif;
+  font-weight: 300;
+}
+
+.hover-header:hover {
+  border-radius: 8px 8px 0px 0px;
+  background-color: rgb(207, 206, 206);
+
+}
+
+
+.tab .tab-headers .tab-header.active {
+  color: #4439f1;
+  border: 1px solid black;
+  border-bottom: none;
+  box-shadow: 0px 2px 0px #E5E5E5;
+  font-weight: 400;
+}
+
+.profile-detail-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  min-height: 100vh; 
+  box-sizing: border-box;
+}
+
+.profile-card {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+}
+
+.profile-card__image {
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  margin-right: 20px;
+}
+
+.profile-card__text-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-card__name {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.profile-card__skill {
+  margin: 5px 0 0 0;
+  font-size: 16px;
+  color: #555;
+}
+
+.profile-card__bio {
+  width: 100%;
+  max-width: 600px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 20px; 
+  margin-bottom: 40px;
+}
+
+.profile-card__bio-content {
+  font-size: 16px;
+  color: #555;
+}
+
+.profile-card__bio-content p {
+  margin: 10px 0;
 }

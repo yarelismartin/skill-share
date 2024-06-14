@@ -11,12 +11,12 @@ export default function ProfileTab({ children }) {
   return (
     <div>
       <div style={{
-        borderBottom: 'solid black', width: '40%', borderWidth: '1.8px', alignContent: 'center', display: 'block', marginLeft: 'auto', marginRight: 'auto', marginTop: '50px',
+        width: '40%', borderWidth: '1.8px', alignContent: 'center', display: 'block', marginLeft: 'auto', marginRight: 'auto', marginTop: '50px',
       }}
       >
         <button
           type="button"
-          className="tab-button"
+          className={activeTab === 'Bio' ? 'tab-button' : ''}
           onClick={() => handleClick('Bio')}
           style={{
             backgroundColor: 'inherit', color: 'black', padding: '10px 15px', borderWidth: '0px',
@@ -25,7 +25,7 @@ export default function ProfileTab({ children }) {
         </button>
         <button
           type="button"
-          className="tab-button"
+          className={activeTab === 'Review' ? 'tab-button' : ''}
           onClick={() => handleClick('Review')}
           style={{
             backgroundColor: 'inherit', color: 'black', padding: '10px 15px', borderWidth: '0px',
