@@ -9,14 +9,8 @@ export default function Profile() {
   const [userProfile, setUserProfile] = useState({});
   const { user } = useAuth();
 
-  const getUserProfile = () => {
-    getSingleProfile(user.uid).then(setUserProfile);
-  };
-
-  console.warn('profiles', userProfile);
-
   useEffect(() => {
-    getUserProfile();
+    getSingleProfile(user.uid).then(setUserProfile);
   }, [user.uid]);
 
   return (
