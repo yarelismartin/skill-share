@@ -317,6 +317,7 @@ body {
   width: 100px;
   height: 100px;
   margin-right: 20px;
+  object-fit: cover;
 }
 
 .profile-card__text-container {
@@ -334,6 +335,10 @@ body {
   margin: 5px 0 0 0;
   font-size: 16px;
   color: #555;
+}
+
+.profile-card__location{
+  font-size: 13px
 }
 
 .profile-card__bio {

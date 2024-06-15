@@ -14,7 +14,7 @@ export default function ProfileCard({ profileObj }) {
     >
       <div><img
         style={{
-          width: '100px', height: '100px', borderRadius: '80%', marginTop: '20px',
+          width: '100px', height: '100px', borderRadius: '50%', marginTop: '20px', objectFit: 'cover',
         }}
         src={profileObj.image}
         alt="profile-pic"

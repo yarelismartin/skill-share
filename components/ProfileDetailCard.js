@@ -10,6 +10,7 @@ export default function ProfileDetailCard({ profileObj }) {
         <div className="profile-card__text-container">
           <h2 className="profile-card__name">{profileObj.name}</h2>
           <p className="profile-card__skill">{profileObj.skill}</p>
+          <p className="profile-card__location">{profileObj.location}</p>
         </div>
       </div>
       <div className="profile-card__bio">
@@ -27,5 +28,6 @@ ProfileDetailCard.propTypes = {
     name: PropTypes.string,
     skill: PropTypes.string,
     bio: PropTypes.string,
+    location: PropTypes.string,
   }).isRequired,
 };
