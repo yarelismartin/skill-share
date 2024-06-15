@@ -15,7 +15,6 @@ export default function ReviewForm() {
   const router = useRouter();
 
   const reviewedUserId = router.query;
-  console.warn(reviewedUserId);
 
   const handleSubmit = (e) => {
     e.preventDefault();
