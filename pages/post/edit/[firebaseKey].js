@@ -8,6 +8,7 @@ export default function UpdatePost() {
   const router = useRouter();
 
   const { firebaseKey } = router.query;
+  console.warn(firebaseKey);
 
   useEffect(() => {
     getSinglePost(firebaseKey).then(setEditItem);
