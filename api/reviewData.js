@@ -28,4 +28,22 @@ const updateReview = (payload) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-export { createReview, updateReview };
+const getReviewsForUser = (reviewedUser) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/reviews.json?orderBy="reviewed_user_id"&equalTo="${reviewedUser}"`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data) {
+        resolve(Object.values(data));
+      } else {
+        resolve([]);
+      }
+    })
+    .catch(reject);
+});
+
+export { createReview, updateReview, getReviewsForUser };
