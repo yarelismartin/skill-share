@@ -1,7 +1,8 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useRouter } from 'next/router';
+import PropTypes from 'prop-types';
 import { useAuth } from '../../utils/context/authContext';
 import { createReview, updateReview } from '../../api/reviewData';
 
@@ -9,7 +10,7 @@ const initialValue = {
   review_post: '',
 };
 
-export default function ReviewForm() {
+export default function ReviewForm({ getReviews }) {
   const [formInput, setFormInput] = useState(initialValue);
   const { user } = useAuth();
   const router = useRouter();
@@ -23,7 +24,10 @@ export default function ReviewForm() {
     };
     createReview(payload).then(({ name }) => {
       const patchPayload = { firebaseKey: name };
-      updateReview(patchPayload).then(() => setFormInput(initialValue));
+      updateReview(patchPayload).then(() => {
+        setFormInput(initialValue);
+        getReviews();
+      });
     });
   };
 
@@ -36,10 +40,16 @@ export default function ReviewForm() {
   };
 
   return (
-    <div style={{ width: '80%' }}>
+    <div style={{
+      width: '80%', border: '1px solid', margin: '20px auto', padding: '15px', borderRadius: '10px', borderColor: '#0089FF',
+    }}
+    >
       <Form onSubmit={handleSubmit}>
-        <Form.Group className="input-form">
+        <Form.Group className="input-form" style={{ marginTop: '0px' }}>
           <Form.Control
+            style={{
+              border: '1.6px solid', borderColor: '#CBC9C9',
+            }}
             as="textarea"
             rows={5}
             placeholder="Create Review"
@@ -49,8 +59,15 @@ export default function ReviewForm() {
             required
           />
         </Form.Group>
-        <Button type="submit">Review</Button>
+        <hr style={{ backgroundColor: '#CBC9C9', margin: '10px' }} />
+        <div style={{ display: 'flex', justifyContent: 'flex-end', margin: '10px' }}>
+          <Button type="submit">Review</Button>
+        </div>
       </Form>
     </div>
   );
 }
+
+ReviewForm.propTypes = {
+  getReviews: PropTypes.func.isRequired,
+};

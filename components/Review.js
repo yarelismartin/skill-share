@@ -9,8 +9,10 @@ export default function Review() {
   const router = useRouter();
 
   const reviewedUser = router.query;
-  const getReviews = () => {
-    getReviewsForUser(reviewedUser.uid).then(setReviews);
+  const getReviews = async () => {
+    const fetchedReviews = await getReviewsForUser(reviewedUser.uid);
+    const sortedReviews = fetchedReviews.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+    setReviews(sortedReviews);
   };
 
   useEffect(() => {
@@ -19,10 +21,12 @@ export default function Review() {
 
   return (
     <div>
-      <ReviewForm />
-      {reviews.map((review) => (
-        <ReviewCard key={review.firebaseKey} reviewObj={review} />
-      ))}
+      <ReviewForm getReviews={getReviews} />
+      <div style={{ display: 'flex', flexDirection: 'column' }}>
+        {reviews.map((review) => (
+          <ReviewCard key={review.firebaseKey} reviewObj={review} onUpdate={getReviews} />
+        ))}
+      </div>
 
     </div>
   );
