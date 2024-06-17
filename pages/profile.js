@@ -1,21 +1,17 @@
 import { Button } from 'react-bootstrap';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { signOut } from '../utils/auth';
-import { getSingleProfile } from '../api/profileData';
-import { useAuth } from '../utils/context/authContext';
-import ProfileCard from '../components/ProfileCard';
+import Tab from '../components/Tab';
+import Bio from '../components/Bio';
+import Review from '../components/Review';
 
 export default function Profile() {
-  const [userProfile, setUserProfile] = useState({});
-  const { user } = useAuth();
-
-  useEffect(() => {
-    getSingleProfile(user.uid).then(setUserProfile);
-  }, [user.uid]);
-
   return (
     <div>
-      <ProfileCard key={userProfile.firebaseKey} profileObj={userProfile} />
+      <Tab>
+        <Bio label="Bio" />
+        <Review label="Review" />
+      </Tab>
 
       <Button variant="danger" onClick={signOut}>Sign Out</Button>
     </div>
