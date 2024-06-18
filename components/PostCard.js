@@ -51,6 +51,8 @@ export default function PostCard({ postObj, onUpdate }) {
     }
   };
 
+  // Check if the provided date string is a valid date
+  // It returns true if the date string is a valid date, and false otherwise.
   // eslint-disable-next-line no-restricted-globals
   const isValidDate = (date) => !isNaN(Date.parse(date));
 
