@@ -10,13 +10,17 @@ export default function Bio() {
   const { uid } = router.query;
   const { user } = useAuth();
 
-  useEffect(() => {
+  const getProfile = () => {
     if (router.pathname.startsWith('/discover/')) {
       getSingleProfile(uid).then(setUserProfile);
     } else {
       getSingleProfile(user.uid).then(setUserProfile);
     }
-  }, [uid, user.uid, router.pathname]);
+  };
+
+  useEffect(() => {
+    getProfile();
+  }, []);
 
   return (
     <div>

@@ -41,6 +41,19 @@ export default function PostCard({ postObj, onUpdate }) {
     }
   }, [postObj.image]);
 
+  const handleClick = () => {
+    router.push(`/community/comment/${postObj.firebaseKey}`);
+  };
+
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      handleClick();
+    }
+  };
+
+  // eslint-disable-next-line no-restricted-globals
+  const isValidDate = (date) => !isNaN(Date.parse(date));
+
   return (
     <div>
       <div className="post-card">
@@ -49,7 +62,13 @@ export default function PostCard({ postObj, onUpdate }) {
           {/* <img className="avatar" src="/profile-pic.jpg" src={profileObj.image} alt="User Avatar" /> */}
           <div className="user-info">
             {/* <span className="user-name">{profileObj.name}</span> */}
-            <span className="time-created">{formatDistanceToNow(new Date(postObj.timestamp), { addSuffix: true })}</span>
+            {/* { !router.pathname.startsWith('/community/comment/') && (<span className="time-created">{formatDistanceToNow(new Date(postObj.timestamp), { addSuffix: true })}</span>)} */}
+            {isValidDate(postObj.timestamp) && (
+              <span className="time-created">
+                {formatDistanceToNow(new Date(postObj.timestamp), { addSuffix: true })}
+              </span>
+            )}
+
           </div>
           {postObj.uid === user.uid && (
           <div className="menu-container">
@@ -91,12 +110,23 @@ export default function PostCard({ postObj, onUpdate }) {
           </p>
         </div>
         <div className="card-footer">
-          <span className="comment">
-            <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M8.00002 18.6667H18.6667V16H8.00002V18.6667ZM8.00002 14.6667H24V12H8.00002V14.6667ZM8.00002 10.6667H24V8H8.00002V10.6667ZM2.66669 29.3333V5.33333C2.66669 4.6 2.92802 3.972 3.45069 3.44933C3.97246 2.92756 4.60002 2.66667 5.33335 2.66667H26.6667C27.4 2.66667 28.028 2.92756 28.5507 3.44933C29.0725 3.972 29.3334 4.6 29.3334 5.33333V21.3333C29.3334 22.0667 29.0725 22.6947 28.5507 23.2173C28.028 23.7391 27.4 24 26.6667 24H8.00002L2.66669 29.3333Z" fill="#34364A" />
-            </svg>
+          { router.pathname.startsWith('/community/comment') ? '' : (
+            <span
+              className="comment"
+              onClick={handleClick}
+              onKeyDown={handleKeyDown}
+              tabIndex={0}
+              role="button"
+              aria-label="Go to comment"
+              style={{ cursor: 'pointer' }}
+            >
+              <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8.00002 18.6667H18.6667V16H8.00002V18.6667ZM8.00002 14.6667H24V12H8.00002V14.6667ZM8.00002 10.6667H24V8H8.00002V10.6667ZM2.66669 29.3333V5.33333C2.66669 4.6 2.92802 3.972 3.45069 3.44933C3.97246 2.92756 4.60002 2.66667 5.33335 2.66667H26.6667C27.4 2.66667 28.028 2.92756 28.5507 3.44933C29.0725 3.972 29.3334 4.6 29.3334 5.33333V21.3333C29.3334 22.0667 29.0725 22.6947 28.5507 23.2173C28.028 23.7391 27.4 24 26.6667 24H8.00002L2.66669 29.3333Z" fill="#34364A" />
+              </svg>
 
-          </span>
+            </span>
+          )}
+
         </div>
       </div>
 

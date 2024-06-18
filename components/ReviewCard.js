@@ -18,9 +18,13 @@ export default function ReviewCard({ reviewObj, onUpdate }) {
     }
   };
 
-  useEffect(() => {
+  const getAProfile = () => {
     getSingleProfile(reviewObj.uid).then(setReviewerName);
-  }, [reviewObj.uid]);
+  };
+
+  useEffect(() => {
+    getAProfile();
+  }, []);
 
   return (
     <div>

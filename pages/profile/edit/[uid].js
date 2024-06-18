@@ -7,9 +7,13 @@ export default function EitProfile() {
   const [profile, setProfile] = useState({});
   const { user } = useAuth();
 
-  useEffect(() => {
+  const getProfile = () => {
     getSingleProfile(user.uid).then(setProfile);
-  }, [user.uid]);
+  };
+
+  useEffect(() => {
+    getProfile();
+  }, []);
 
   return (
     <div>

@@ -39,8 +39,12 @@ function PostForm({ postObj }) {
     }
   };
 
-  useEffect(() => {
+  const getAllCategories = () => {
     getCategories().then(setSelectCategory);
+  };
+
+  useEffect(() => {
+    getAllCategories();
     if (postObj?.firebaseKey) setFormInput(postObj);
   }, [postObj]);
 
