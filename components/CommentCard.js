@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @next/next/no-img-element */
 import { formatDistanceToNow } from 'date-fns';
 import React, { useEffect, useState } from 'react';

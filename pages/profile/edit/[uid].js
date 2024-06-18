@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { getSingleProfile } from '../../../api/profileData';
 import { useAuth } from '../../../utils/context/authContext';
