@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { getSingleProfile } from '../../../api/profileData';
 import { useAuth } from '../../../utils/context/authContext';
@@ -7,9 +8,13 @@ export default function EitProfile() {
   const [profile, setProfile] = useState({});
   const { user } = useAuth();
 
-  useEffect(() => {
+  const getProfile = () => {
     getSingleProfile(user.uid).then(setProfile);
-  }, [user.uid]);
+  };
+
+  useEffect(() => {
+    getProfile();
+  }, []);
 
   return (
     <div>

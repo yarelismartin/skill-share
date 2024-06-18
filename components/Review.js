@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import ReviewForm from './forms/ReviewForm';
@@ -11,8 +12,9 @@ export default function Review() {
   const { user } = useAuth();
 
   const reviewedUser = router.query;
-  const getReviews = async (userId) => {
-    const fetchedReviews = await getReviewsForUser(userId);
+
+  const getReviews = async () => {
+    const fetchedReviews = await getReviewsForUser(reviewedUser.uid);
     const sortedReviews = fetchedReviews.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
     setReviews(sortedReviews);
   };
@@ -31,7 +33,7 @@ export default function Review() {
 
       <div style={{ display: 'flex', flexDirection: 'column' }}>
         {reviews.map((review) => (
-          <ReviewCard key={review.firebaseKey} reviewObj={review} onUpdate={getReviews} />
+          <ReviewCard key={review.firebaseKey} reviewObj={review} onUpdate={useEffect} />
         ))}
       </div>
 

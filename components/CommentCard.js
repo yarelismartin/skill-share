@@ -1,26 +1,25 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @next/next/no-img-element */
-/* eslint-disable no-undef */
+import { formatDistanceToNow } from 'date-fns';
 import React, { useEffect, useState } from 'react';
 import { Card } from 'react-bootstrap';
-import { formatDistanceToNow } from 'date-fns';
 import PropTypes from 'prop-types';
 import { getSingleProfile } from '../api/profileData';
-import { deleteReview } from '../api/reviewData';
+import { deleteComment } from '../api/commentData';
 import { useAuth } from '../utils/context/authContext';
 
-export default function ReviewCard({ reviewObj, onUpdate }) {
-  const [reviewerName, setReviewerName] = useState({});
+export default function CommentCard({ commentObj, onUpdate }) {
+  const [commenterName, setCommenterName] = useState({});
   const { user } = useAuth();
 
   const handleClick = () => {
-    if (window.confirm('Are you sure you want to delete your review? ')) {
-      deleteReview(reviewObj.firebaseKey).then(onUpdate);
+    if (window.confirm('Are you sure you want to delete your comment? ')) {
+      deleteComment(commentObj.firebaseKey).then(onUpdate);
     }
   };
 
   const getAProfile = () => {
-    getSingleProfile(reviewObj.uid).then(setReviewerName);
+    getSingleProfile(commentObj.uid).then(setCommenterName);
   };
 
   useEffect(() => {
@@ -29,7 +28,7 @@ export default function ReviewCard({ reviewObj, onUpdate }) {
 
   return (
     <div>
-      <Card style={{ width: '18rem', margin: '15px auto', boxShadow: ' 0 2px 4px rgba(0, 0, 0, 0.1)' }}>
+      <Card style={{ margin: '15px auto', border: 'none' }}>
         <Card.Body>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -40,12 +39,12 @@ export default function ReviewCard({ reviewObj, onUpdate }) {
                   borderRadius: '50%',
                   objectFit: 'cover',
                 }}
-                src={reviewerName.image}
+                src={commenterName.image}
                 alt="profile-pic"
               />
-              <Card.Title style={{ marginLeft: '8px' }}>{reviewerName.name?.split(' ')[0]}</Card.Title>
+              <Card.Title style={{ marginLeft: '8px' }}>{commenterName.name?.split(' ')[0]}</Card.Title>
             </div>
-            {reviewObj.uid === user.uid && (
+            {commentObj.uid === user.uid && (
             <svg
               width="16"
               height="16"
@@ -64,10 +63,9 @@ export default function ReviewCard({ reviewObj, onUpdate }) {
             </svg>
             )}
           </div>
-          <hr />
-          <Card.Text>{reviewObj.review_post}</Card.Text>
-          <footer style={{ fontSize: 'smaller' }}>
-            {formatDistanceToNow(new Date(reviewObj.timestamp), { addSuffix: true })}
+          <Card.Text style={{ fontSize: '14px', marginTop: '10px' }}>{commentObj.content}</Card.Text>
+          <footer style={{ fontSize: '12px', marginTop: '-5px' }}>
+            {formatDistanceToNow(new Date(commentObj.timestamp), { addSuffix: true })}
           </footer>
         </Card.Body>
       </Card>
@@ -75,10 +73,10 @@ export default function ReviewCard({ reviewObj, onUpdate }) {
   );
 }
 
-ReviewCard.propTypes = {
-  reviewObj: PropTypes.shape({
+CommentCard.propTypes = {
+  commentObj: PropTypes.shape({
     uid: PropTypes.string,
-    review_post: PropTypes.string,
+    content: PropTypes.string,
     timestamp: PropTypes.string,
     firebaseKey: PropTypes.string,
   }).isRequired,

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import PostForm from '../../../components/forms/PostForm';
@@ -9,9 +10,13 @@ export default function UpdatePost() {
 
   const { firebaseKey } = router.query;
 
-  useEffect(() => {
+  const getPost = () => {
     getSinglePost(firebaseKey).then(setEditItem);
-  }, [firebaseKey]);
+  };
+
+  useEffect(() => {
+    getPost();
+  }, []);
 
   return (
     <div>
