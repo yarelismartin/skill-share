@@ -19,7 +19,7 @@ export default function CommentCard({ commentObj }) {
 
   return (
     <div>
-      <Card style={{ width: '18rem', margin: '15px auto', boxShadow: ' 0 2px 4px rgba(0, 0, 0, 0.1)' }}>
+      <Card style={{ margin: '15px auto', border: 'none' }}>
         <Card.Body>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -54,8 +54,8 @@ export default function CommentCard({ commentObj }) {
             </svg>
             )} */}
           </div>
-          <Card.Text>{commentObj.content}</Card.Text>
-          <footer style={{ fontSize: 'smaller' }}>
+          <Card.Text style={{ fontSize: '14px', marginTop: '10px' }}>{commentObj.content}</Card.Text>
+          <footer style={{ fontSize: '12px', marginTop: '-5px' }}>
             {formatDistanceToNow(new Date(commentObj.timestamp), { addSuffix: true })}
           </footer>
         </Card.Body>

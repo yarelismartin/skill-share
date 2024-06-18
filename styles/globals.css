@@ -360,3 +360,13 @@ body {
 .profile-card__bio-content p {
   margin: 10px 0;
 }
+
+.comment-container {
+  background-color: #FFFFFF;
+  width: 70%;
+  height: auto;
+  margin: 30px auto;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px #CBC9C9;
+}

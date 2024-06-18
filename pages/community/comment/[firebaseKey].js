@@ -29,12 +29,14 @@ export default function PostDetail() {
   }, []);
 
   return (
-    <div>
+    <div style={{ width: '100%', padding: '25px 0px' }}>
       <PostCard key={post.firebaseKey} postObj={post} />
-      <CommetnForm getComments={getComments} />
-      {comments.map((comment) => (
-        <CommentCard key={comment.firebaseKey} commentObj={comment} />
-      ))}
+      <div className="comment-container">
+        <CommetnForm getComments={getComments} />
+        {comments.map((comment) => (
+          <CommentCard key={comment.firebaseKey} commentObj={comment} />
+        ))}
+      </div>
 
     </div>
   );
