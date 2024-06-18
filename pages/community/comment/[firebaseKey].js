@@ -5,6 +5,7 @@ import { getSinglePost } from '../../../api/postData';
 import PostCard from '../../../components/PostCard';
 import CommentCard from '../../../components/CommentCard';
 import { getCommentsForUser } from '../../../api/commentData';
+import CommetnForm from '../../../components/forms/CommentForm';
 
 export default function PostDetail() {
   const [post, setPost] = useState({});
@@ -16,8 +17,10 @@ export default function PostDetail() {
     getSinglePost(firebaseKey).then(setPost);
   };
 
-  const getComments = () => {
-    getCommentsForUser(firebaseKey).then(setComments);
+  const getComments = async () => {
+    const allComments = await getCommentsForUser(firebaseKey);
+    const sortedComments = allComments.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+    setComments(sortedComments);
   };
 
   useEffect(() => {
@@ -28,6 +31,7 @@ export default function PostDetail() {
   return (
     <div>
       <PostCard key={post.firebaseKey} postObj={post} />
+      <CommetnForm getComments={getComments} />
       {comments.map((comment) => (
         <CommentCard key={comment.firebaseKey} commentObj={comment} />
       ))}
