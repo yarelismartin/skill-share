@@ -32,7 +32,18 @@ export default function ProfileDetailCard({ profileObj }) {
             </svg>
           </span>
         </button>
-      ) : ('')}
+      ) : (
+        <button
+          type="button"
+          onClick={() => router.push(`/message/${profileObj.uid}/${user.uid}`)}
+          style={{
+            color: 'white', fontSize: '10px', width: '130px', height: '30px', backgroundColor: '#3F525B', border: 'none', borderRadius: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', margin: '15px', padding: '10px',
+          }}
+        >
+          Connect with {profileObj.name?.split(' ')[0]}
+        </button>
+      )}
+
       <div className="profile-card__bio">
         <div className="profile-card__bio-content">
           <p>{profileObj.bio}</p>
