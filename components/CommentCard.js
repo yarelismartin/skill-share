@@ -5,9 +5,18 @@ import React, { useEffect, useState } from 'react';
 import { Card } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { getSingleProfile } from '../api/profileData';
+import { deleteComment } from '../api/commentData';
+import { useAuth } from '../utils/context/authContext';
 
-export default function CommentCard({ commentObj }) {
+export default function CommentCard({ commentObj, onUpdate }) {
   const [commenterName, setCommenterName] = useState({});
+  const { user } = useAuth();
+
+  const handleClick = () => {
+    if (window.confirm('Are you sure you want to delete your comment? ')) {
+      deleteComment(commentObj.firebaseKey).then(onUpdate);
+    }
+  };
 
   const getAProfile = () => {
     getSingleProfile(commentObj.uid).then(setCommenterName);
@@ -35,7 +44,7 @@ export default function CommentCard({ commentObj }) {
               />
               <Card.Title style={{ marginLeft: '8px' }}>{commenterName.name?.split(' ')[0]}</Card.Title>
             </div>
-            {/* {commentObj.uid === user.uid && (
+            {commentObj.uid === user.uid && (
             <svg
               width="16"
               height="16"
@@ -52,7 +61,7 @@ export default function CommentCard({ commentObj }) {
                 fill="#9C2929"
               />
             </svg>
-            )} */}
+            )}
           </div>
           <Card.Text style={{ fontSize: '14px', marginTop: '10px' }}>{commentObj.content}</Card.Text>
           <footer style={{ fontSize: '12px', marginTop: '-5px' }}>
@@ -69,5 +78,7 @@ CommentCard.propTypes = {
     uid: PropTypes.string,
     content: PropTypes.string,
     timestamp: PropTypes.string,
+    firebaseKey: PropTypes.string,
   }).isRequired,
+  onUpdate: PropTypes.func.isRequired,
 };
