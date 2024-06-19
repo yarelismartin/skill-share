@@ -55,9 +55,9 @@ export default function MessageForm({ messageObj, onUpdate }) {
               }}
               placeholder="Type your message here..."
               name="message"
-              value={formInput.message}
+              value={formInput.message || ''}
               onChange={handleChange}
-              autocomplete="off"
+              autoComplete="off"
             />
           </Form.Group>
           <Button className="message-btn" variant="primary" type="submit">
