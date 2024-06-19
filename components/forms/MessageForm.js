@@ -40,19 +40,30 @@ export default function MessageForm({ messageObj, onUpdate }) {
 
   return (
     <>
-      <Form style={{ color: 'white' }} onSubmit={handleSubmit}>
-        <Form.Group className="mb-3">
-          <Form.Control
-            type="text"
-            placeholder="Enter Message"
-            name="message"
-            value={formInput.message}
-            onChange={handleChange}
-          />
-        </Form.Group>
-        <Button variant="primary" type="submit">
-          Send Message
-        </Button>
+      <Form
+        style={{
+          color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'flex-end',
+        }}
+        onSubmit={handleSubmit}
+      >
+        <div style={{ display: 'flex', alignItems: 'flex-start', padding: '10px 40px' }}>
+          <Form.Group className="mb-3" style={{ flexGrow: 1, marginBottom: '0' }}>
+            <Form.Control
+              type="text"
+              style={{
+                borderRadius: '15px', width: '700px', marginRight: '10px', padding: '5px 15px',
+              }}
+              placeholder="Type your message here..."
+              name="message"
+              value={formInput.message}
+              onChange={handleChange}
+              autocomplete="off"
+            />
+          </Form.Group>
+          <Button className="message-btn" variant="primary" type="submit">
+            Send
+          </Button>
+        </div>
       </Form>
     </>
   );

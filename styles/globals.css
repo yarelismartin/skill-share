@@ -370,3 +370,117 @@ body {
   border-radius: 10px;
   box-shadow: 0 4px 8px #CBC9C9;
 }
+
+:root {
+  --send-bg: #8d38fc;
+  --send-color: white;
+  --receive-bg: #c6c6ca;
+  --receive-text: black;
+  --page-background: #E5E5E5;
+}
+
+body {
+	font-family: "Helvetica Neue", Helvetica, sans-serif;
+  background-color: var(--page-background);
+}
+
+.message-container{
+  margin-top: 5px;
+  padding: 10px 40px ;
+}
+
+.image-text {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+.message-bubble {
+  max-width: 600px;
+  word-wrap: break-word;
+  margin-bottom: 10px;
+  line-height: 24px;
+  position: relative;
+	padding: 10px 20px;
+  border-radius: 25px;
+  
+  &:before, &:after {
+    content: "";
+		position: absolute;
+    bottom: 0;
+    height: 25px;
+  }
+}
+
+.send {
+	color: var(--send-color); 
+	background: var(--send-bg);
+	align-self: flex-end;
+  margin-left: auto;
+		
+	&:before {
+		right: -7px;
+    width: 20px;
+    background-color: var(--send-bg);
+		border-bottom-left-radius: 16px 14px;
+	}
+
+	&:after {
+		right: -26px;
+    width: 26px;
+    background-color: var(--page-background);
+		border-bottom-left-radius: 10px;
+	}
+}
+
+.send-date {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 0px;
+}
+
+.receive-date {
+  display: flex;
+  justify-content:flex-start;
+}
+
+.receive {
+	background: var(--receive-bg);
+	color: black;
+  align-self: flex-start;
+  margin-right: auto;
+		
+	&:before {
+		left: -7px;
+    width: 20px;
+    background-color: var(--receive-bg);
+		border-bottom-right-radius: 16px 14px;
+	}
+
+	&:after {
+		left: -26px;
+    width: 26px;
+    background-color: var(--page-background);
+		border-bottom-right-radius: 10px;
+	}
+}
+
+.message-btn {
+  border-radius: 20px;
+  background-color: #b67fff;
+  border: none;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.message-btn:hover {
+  background-color: #8d38fc;
+  transform: scale(1.1);
+}
+
+.scroll-down {
+  transition: transform 0.5s ease, background-color 0.3s ease;
+}
+
+.scroll-down:hover {
+  transform: scale(1.6);
+}
