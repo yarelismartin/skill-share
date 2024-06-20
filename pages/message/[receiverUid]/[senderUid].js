@@ -53,17 +53,15 @@ export default function ShowMessages() {
 
         <div style={{ display: 'flex', flexDirection: 'column', width: '80%' }}>
           {messageDetails?.messages?.sort((a, b) => new Date(a.dateSent) - new Date(b.dateSent)).map((mes) => (
-            <>
-              <div key={mes.firebaseKey} className="message-container">
-                <div>
-                  <div className="image-text">
-                    <p className={`${mes.senderId === senderUid ? 'send' : 'receive'} message-bubble`}>{mes.message}</p>
-                  </div>
-                  <p className={`${mes.senderId === senderUid ? 'send-date' : 'receive-date'}`} style={{ fontSize: '12px' }}>{formatDistanceToNow(new Date(mes.dateSent), { addSuffix: true })}</p>
-
+            <div key={mes.firebaseKey} className="message-container">
+              <div>
+                <div className="image-text">
+                  <p className={`${mes.senderId === senderUid ? 'send' : 'receive'} message-bubble`}>{mes.message}</p>
                 </div>
+                <p className={`${mes.senderId === senderUid ? 'send-date' : 'receive-date'}`} style={{ fontSize: '12px' }}>{formatDistanceToNow(new Date(mes.dateSent), { addSuffix: true })}</p>
+
               </div>
-            </>
+            </div>
           ))}
           <br />
           <MessageForm messageObj={newMessage} onUpdate={getMessageDetails} />
