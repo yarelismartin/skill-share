@@ -14,17 +14,22 @@ export default function Review() {
   const reviewedUser = router.query;
 
   const getReviews = async () => {
-    const fetchedReviews = await getReviewsForUser(reviewedUser.uid);
+    let userId;
+    if (router.pathname.startsWith('/discover/') && reviewedUser.uid) {
+      userId = reviewedUser.uid;
+    } else {
+      userId = user.uid;
+    }
+
+    const fetchedReviews = await getReviewsForUser(userId);
     const sortedReviews = fetchedReviews.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
     setReviews(sortedReviews);
   };
 
+  console.warn(reviews, user.uid);
+
   useEffect(() => {
-    if (router.pathname.startsWith('/discover/')) {
-      getReviews(reviewedUser.uid);
-    } else {
-      getReviews(user.uid);
-    }
+    getReviews();
   }, [router.pathname, user.uid, reviewedUser.uid]);
 
   return (
@@ -33,7 +38,7 @@ export default function Review() {
 
       <div style={{ display: 'flex', flexDirection: 'column' }}>
         {reviews.map((review) => (
-          <ReviewCard key={review.firebaseKey} reviewObj={review} onUpdate={useEffect} />
+          <ReviewCard key={review.firebaseKey} reviewObj={review} onUpdate={getReviews} />
         ))}
       </div>
 

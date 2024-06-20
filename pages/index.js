@@ -6,7 +6,7 @@ import useProfileCheck from '../utils/hooks/useProfileCheck';
 function Home() {
   const { user } = useAuth(); // TODO: COMMENT IN FOR AUTH
   const router = useRouter();
-  const userHasProfile = useProfileCheck();
+  const userHasProfile = useProfileCheck(null);
 
   return (
     <div

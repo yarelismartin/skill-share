@@ -11,6 +11,7 @@ const initialValue = {
   skill: '',
   learning_preference: '',
   bio: '',
+  image: '',
 };
 
 export default function ProfileForm({ profileObj }) {
@@ -55,6 +56,18 @@ export default function ProfileForm({ profileObj }) {
             placeholder="Name"
             name="name"
             value={formInput.name}
+            onChange={handleChange}
+            required
+          />
+        </Form.Group>
+
+        {/* IMAGE INPUT  */}
+        <Form.Group className="mb-3 input-form">
+          <Form.Control
+            type="text"
+            placeholder="Attach an image URL of yourself"
+            name="image"
+            value={formInput.image}
             onChange={handleChange}
             required
           />
@@ -125,6 +138,7 @@ ProfileForm.propTypes = {
     skill: PropTypes.string,
     bio: PropTypes.string,
     firebaseKey: PropTypes.string,
+    image: PropTypes.string,
   }),
 };
 

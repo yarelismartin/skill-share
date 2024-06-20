@@ -484,3 +484,16 @@ body {
 .scroll-down:hover {
   transform: scale(1.6);
 }
+
+.comment-icon {
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  border: none;
+}
+
+.comment-icon:hover {
+  transform: scale(1.1);
+  /* path {
+   fill: #8d38fc; 
+  } */
+  
+}

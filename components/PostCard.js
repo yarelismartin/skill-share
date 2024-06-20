@@ -91,7 +91,7 @@ export default function PostCard({ postObj, onUpdate }) {
                 Edit Post
               </button>
               <button type="button" className="dropdown-item delete" onClick={deleteAPost}>
-                <span>
+                <span className="comment-icon">
                   <svg width="15" height="15" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path fillRule="evenodd" clipRule="evenodd" d="M8 1V0H4V1H1V3H11V1H8ZM9.33333 12L10 4H2L2.66667 12H9.33333Z" fill="black" />
                   </svg>
@@ -122,7 +122,7 @@ export default function PostCard({ postObj, onUpdate }) {
               aria-label="Go to comment"
               style={{ cursor: 'pointer' }}
             >
-              <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" className="comment-icon">
                 <path d="M8.00002 18.6667H18.6667V16H8.00002V18.6667ZM8.00002 14.6667H24V12H8.00002V14.6667ZM8.00002 10.6667H24V8H8.00002V10.6667ZM2.66669 29.3333V5.33333C2.66669 4.6 2.92802 3.972 3.45069 3.44933C3.97246 2.92756 4.60002 2.66667 5.33335 2.66667H26.6667C27.4 2.66667 28.028 2.92756 28.5507 3.44933C29.0725 3.972 29.3334 4.6 29.3334 5.33333V21.3333C29.3334 22.0667 29.0725 22.6947 28.5507 23.2173C28.028 23.7391 27.4 24 26.6667 24H8.00002L2.66669 29.3333Z" fill="#34364A" />
               </svg>
 
