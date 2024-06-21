@@ -18,7 +18,12 @@ export default function Menu({ categories, onSelectCategory }) {
 
   return (
     <>
-      <section className="filter-wrapper" style={{ backgroundColor: '#f5f5f5', border: '1px solid #ddd', padding: '10px' }}>
+      <section
+        className="filter-wrapper"
+        style={{
+          backgroundColor: '#f5f5f5', border: '1px solid #ddd', padding: '10px', borderRadius: '6px', marginBottom: 'auto',
+        }}
+      >
         <p className="filter-title" style={{ fontSize: '13px', marginBottom: '5px' }}> MENU</p>
         <div className="filter-data">
           {categories.map((category) => (
@@ -27,7 +32,7 @@ export default function Menu({ categories, onSelectCategory }) {
               <button type="button" className="filter-item" onClick={() => onSelectCategory(category.firebaseKey)}>{category.category_name}</button>
             </span>
           ))}
-          <Button type="button" onClick={() => { router.push('/post/new'); }}>Create A Post</Button>
+          <Button style={{ marginTop: '40px' }} type="button" onClick={() => { router.push('/post/new'); }}>Create A Post</Button>
         </div>
       </section>
     </>

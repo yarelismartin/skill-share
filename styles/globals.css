@@ -172,17 +172,17 @@ body {
 /* styling for the whole product list container, including the filters on the side */
 .product-list-container {
   display: flex;
-  height: 150vh; 
+  height: 80vh; 
 }
 
 
 .products-container {
   flex: 1;
   overflow-y: auto; /* Enable scrolling for the content area */
-  padding: 10px;
   height: 87vh;
-  margin-top: 20px;
 }
+
+
 
 /* styling for the filters */
 .filter-wrapper {
@@ -191,7 +191,7 @@ body {
   width: 220px; /* Adjust as needed */
   font-family: "Roboto", sans-serif;
   font-style: normal;
-
+  margin-bottom: -25;
 }
 
 .filter-title {
@@ -483,4 +483,17 @@ body {
 
 .scroll-down:hover {
   transform: scale(1.6);
+}
+
+.comment-icon {
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  border: none;
+}
+
+.comment-icon:hover {
+  transform: scale(1.1);
+  /* path {
+   fill: #8d38fc; 
+  } */
+  
 }

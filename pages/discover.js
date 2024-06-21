@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Form } from 'react-bootstrap';
 import ProfileCard from '../components/ProfileCard';
 import { getAllOtherProfiles } from '../api/profileData';
@@ -8,6 +8,7 @@ import { useAuth } from '../utils/context/authContext';
 export default function Discover() {
   const [profiles, setProfiles] = useState([]);
   const [search, setSearch] = useState('');
+  const sendDiscoverRef = useRef(null);
 
   const { user } = useAuth();
 
@@ -20,11 +21,18 @@ export default function Discover() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const handleScroll = () => {
+    if (typeof window !== 'undefined') {
+      sendDiscoverRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    }
+  };
+
   return (
     <>
       <div style={{ display: 'flex', justifyContent: 'center', margin: '25px' }}>
         <div style={{ width: '30%', maxWidth: '600px' }}>
-          <Form className="search-bar" style={{ marginTop: '30px', marginBottom: '20px', position: 'relative' }}>
+          <br ref={sendDiscoverRef} />
+          <Form className="search-bar" style={{ marginTop: '20px', marginBottom: '20px', position: 'relative' }}>
             <Form.Control
               type="search"
               placeholder="Search"
@@ -67,6 +75,18 @@ export default function Discover() {
       || item.skill.toLowerCase().includes(search))).map((item) => (
         <ProfileCard key={item.firebaseKey} profileObj={item} />
         ))}
+      </div>
+      <div style={{
+        display: 'flex', justifyContent: 'flex-end', marginTop: '30px', paddingBottom: '30px', marginRight: '40px',
+      }}
+      >
+        <button aria-label="scroll-to-send" type="button" onClick={handleScroll} style={{ border: 'none', backgroundColor: 'inherit' }}>
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="scroll-down">
+            <circle cx="12" cy="12" r="8" transform="rotate(-90 12 12)" stroke="black" strokeWidth="1.00088" strokeLinejoin="round" />
+            <path d="M8.25 13.75C9.8121 12.1879 10.6879 11.3121 12.25 9.75L16.25 13.75" stroke="black" strokeWidth="1.00088" strokeLinejoin="round" />
+          </svg>
+
+        </button>
       </div>
     </>
   );

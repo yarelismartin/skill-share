@@ -52,7 +52,7 @@ export default function ReviewForm({ getReviews }) {
             }}
             as="textarea"
             rows={5}
-            placeholder="Create Review"
+            placeholder="Create Review..."
             name="review_post"
             value={formInput.review_post}
             onChange={handleChange}

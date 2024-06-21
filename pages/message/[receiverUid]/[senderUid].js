@@ -46,7 +46,7 @@ export default function ShowMessages() {
 
         <img src={messageDetails?.receiver?.image} alt="profile pic" className="profile-card__image" />
         <div className="profile-card__text-container">
-          <h2 className="profile-card__name">{messageDetails?.receiver?.name}</h2>
+          <h2 className="profile-card__name">{messageDetails?.receiver?.name.split(' ')[0]}</h2>
           <p className="profile-card__skill">{messageDetails?.receiver?.skill}</p>
           <p className="profile-card__location">{messageDetails?.receiver?.location}</p>
         </div>
