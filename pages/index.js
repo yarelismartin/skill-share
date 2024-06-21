@@ -1,12 +1,29 @@
 import { Button } from 'react-bootstrap';
 import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 import { useAuth } from '../utils/context/authContext'; // TODO: COMMENT IN FOR AUTH
-import useProfileCheck from '../utils/hooks/useProfileCheck';
+import { useProfile } from '../utils/context/ProfileProvider';
+import { getSingleProfile } from '../api/profileData';
+// import useProfileCheck from '../utils/hooks/useProfileCheck';
 
 function Home() {
   const { user } = useAuth(); // TODO: COMMENT IN FOR AUTH
   const router = useRouter();
-  const userHasProfile = useProfileCheck(null);
+  // const userHasProfile = useProfileCheck();
+  const { userHasProfile } = useProfile();
+  const [userInfo, setUserInfo] = useState();
+
+  const getName = () => {
+    getSingleProfile(user.uid).then(setUserInfo);
+  };
+
+  useEffect(() => {
+    getName();
+    console.warn(userInfo);
+  });
+
+  useEffect(() => {
+  }, [userHasProfile]);
 
   return (
     <div
@@ -20,7 +37,7 @@ function Home() {
     >
       { userHasProfile ? (
         <>
-          <h1>Welcome {user.displayName}! </h1>
+          <h1>Welcome back {userInfo?.name}! </h1>
           <p> We are thrilled to have you return to our community of knowledge sharers. Ready to pick up where you left off and explore even more skill-swapping opportunities?</p>
         </>
       ) : (

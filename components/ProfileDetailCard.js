@@ -14,7 +14,7 @@ export default function ProfileDetailCard({ profileObj }) {
       <div className="profile-card">
         <img src={profileObj.image} alt="profile pic" className="profile-card__image" />
         <div className="profile-card__text-container">
-          <h2 className="profile-card__name">{profileObj.name?.split(' ')[0]}</h2>
+          <h2 className="profile-card__name">{profileObj.name}</h2>
           <p className="profile-card__skill">{profileObj.skill}</p>
           <p className="profile-card__location">{profileObj.location}</p>
         </div>

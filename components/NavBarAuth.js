@@ -1,16 +1,19 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from 'react';
+import React, { useEffect } from 'react';
 import Link from 'next/link';
 import {
   Navbar, Container, Nav, Image,
 } from 'react-bootstrap';
-import useProfileCheck from '../utils/hooks/useProfileCheck';
+import { useProfile } from '../utils/context/ProfileProvider';
 
 export default function NavBarAuth() {
-  const userHasProfile = useProfileCheck();
+  const { userHasProfile } = useProfile();
+
+  useEffect(() => {
+  }, [userHasProfile]);
 
   return (
-    <>
+    <div>
       { userHasProfile ? (
 
         <Navbar collapseOnSelect expand="lg" variant="light" style={{ backgroundColor: 'white' }}>
@@ -48,6 +51,6 @@ export default function NavBarAuth() {
         </Navbar>
 
       )}
-    </>
+    </div>
   );
 }

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
-import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import { createProfile, updateProfile } from '../../api/profileData';
 import { useAuth } from '../../utils/context/authContext';
@@ -14,9 +13,8 @@ const initialValue = {
   image: '',
 };
 
-export default function ProfileForm({ profileObj }) {
+export default function ProfileForm({ profileObj, onUpdate }) {
   const [formInput, setFormInput] = useState(initialValue);
-  const router = useRouter();
   const { user } = useAuth();
 
   const handleChange = (e) => {
@@ -30,12 +28,16 @@ export default function ProfileForm({ profileObj }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (profileObj.firebaseKey) {
-      updateProfile(formInput).then(() => router.push('/discover'));
+      updateProfile(formInput).then(() => {
+        onUpdate();
+      });
     } else {
       const payload = { ...formInput, uid: user.uid };
       createProfile(payload).then(({ name }) => {
         const patchPayload = { firebaseKey: name };
-        updateProfile(patchPayload).then(() => router.push('/discover'));
+        updateProfile(patchPayload).then(() => {
+          onUpdate();
+        });
       });
     }
   };
@@ -47,7 +49,7 @@ export default function ProfileForm({ profileObj }) {
   return (
     <div>
       <Form onSubmit={handleSubmit}>
-        <h2>{profileObj.firebaseKey ? 'Update' : 'Create'} Profile</h2>
+        <h2 style={{ textAlign: 'center' }}>{profileObj.firebaseKey ? 'Update Profile' : ''}</h2>
 
         {/* NAME INPUT  */}
         <Form.Group className="mb-3 input-form">
@@ -124,7 +126,9 @@ export default function ProfileForm({ profileObj }) {
           />
         </Form.Group>
 
-        <Button type="submit">{profileObj.firebaseKey ? 'Update' : 'Create'} Profile </Button>
+        <div className="text-center"> {/* Centering the button */}
+          <Button type="submit">{profileObj.firebaseKey ? 'Update' : 'Create'} Profile</Button>
+        </div>
       </Form>
     </div>
   );
@@ -140,6 +144,7 @@ ProfileForm.propTypes = {
     firebaseKey: PropTypes.string,
     image: PropTypes.string,
   }),
+  onUpdate: PropTypes.func.isRequired,
 };
 
 ProfileForm.defaultProps = {

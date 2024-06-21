@@ -26,8 +26,6 @@ export default function Review() {
     setReviews(sortedReviews);
   };
 
-  console.warn(reviews, user.uid);
-
   useEffect(() => {
     getReviews();
   }, [router.pathname, user.uid, reviewedUser.uid]);
