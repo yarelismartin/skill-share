@@ -46,14 +46,17 @@ export default function ProfileDetailCard({ profileObj }) {
             Connect with {profileObj.name?.split(' ')[0]}
           </button>
         )}
-        <button
-          type="button"
-          onClick={signOut}
-          style={{
-            color: 'white', fontSize: '10px', width: '130px', height: '30px', backgroundColor: '#b82b40', border: 'none', borderRadius: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', margin: '15px', padding: '10px',
-          }}
-        >Sign Out
-        </button>
+        { router.pathname.startsWith('/profile') && (
+          <button
+            type="button"
+            onClick={signOut}
+            style={{
+              color: 'white', fontSize: '10px', width: '130px', height: '30px', backgroundColor: '#b82b40', border: 'none', borderRadius: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', margin: '15px', padding: '10px',
+            }}
+          >Sign Out
+          </button>
+        )}
+
       </div>
 
       <div className="profile-card__bio">

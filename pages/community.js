@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import { Button } from 'react-bootstrap';
 import PostCard from '../components/PostCard';
@@ -47,13 +47,21 @@ export default function Community() {
   }, []);
 
   return (
-    <div className="product-list-container">
-      <Menu categories={category} onSelectCategory={setSelectedCategory} />
-      <section className="products-container">
-        {posts.map((post) => (
-          <PostCard key={post.firebaseKey} postObj={post} onUpdate={postByCategory} />
-        ))}
-      </section>
-    </div>
+    <>
+      <br />
+
+      <div className="product-list-container">
+
+        <Menu categories={category} onSelectCategory={setSelectedCategory} />
+        <section className="products-container">
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
+            {posts.map((post) => (
+              <PostCard key={post.firebaseKey} postObj={post} onUpdate={postByCategory} />
+            ))}
+          </div>
+        </section>
+
+      </div>
+    </>
   );
 }

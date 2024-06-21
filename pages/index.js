@@ -13,17 +13,28 @@ function Home() {
   const { userHasProfile } = useProfile();
   const [userInfo, setUserInfo] = useState();
 
-  const getName = () => {
-    getSingleProfile(user.uid).then(setUserInfo);
-  };
+  // const getName = () => {
+  //   getSingleProfile(user.uid).then(setUserInfo);
+  // };
 
   useEffect(() => {
-    getName();
-    console.warn(userInfo);
-  });
+    let isComponentUnmounted = false;
 
-  useEffect(() => {
-  }, [userHasProfile]);
+    const getUserInfo = async () => {
+      const data = await getSingleProfile(user.uid);
+      if (!isComponentUnmounted) { // Check if component is still mounted
+        setUserInfo(data);
+      }
+    };
+
+    getUserInfo();
+
+    return () => {
+      isComponentUnmounted = true; // Set flag to true when component unmounts
+    };
+  }, [user.uid]);
+  // useEffect(() => {
+  // }, [userHasProfile]);
 
   return (
     <div
