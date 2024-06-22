@@ -7,6 +7,7 @@ import PostCard from '../components/PostCard';
 import { allPosts, getPostByCategory } from '../api/postData';
 import Menu from '../components/Menu';
 import getCategories from '../api/categoryDate';
+import { getSingleProfile } from '../api/profileData';
 
 export default function Community() {
   const [posts, setPosts] = useState([]);
