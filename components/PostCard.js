@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
@@ -6,6 +7,7 @@ import { formatDistanceToNow } from 'date-fns';
 import { useRouter } from 'next/router';
 import { deletePost } from '../api/postData';
 import { useAuth } from '../utils/context/authContext';
+import { getSingleProfile } from '../api/profileData';
 
 export default function PostCard({ postObj, onUpdate }) {
   const [isDropdownVisible, setDropdownVisible] = useState(false); // State variable for menu visibility, initially hidden
@@ -14,6 +16,7 @@ export default function PostCard({ postObj, onUpdate }) {
   const [imageClass, setImageClass] = useState(''); // State to store the class based on the image aspect ratio
   // By using useRef and its current property, you can maintain a persistent reference to a DOM element and perform necessary manipulations or checks after the component has been rendered.
   const imageRef = useRef(null); // Ref to access the image DOM element
+  const [profileObj, setProfileObj] = useState({});
 
   const toggleDropdown = () => {
     setDropdownVisible(!isDropdownVisible);
@@ -24,6 +27,10 @@ export default function PostCard({ postObj, onUpdate }) {
     if (window.confirm('Are you sure you want to delete this post?')) {
       deletePost(postObj.firebaseKey).then(onUpdate);
     }
+  };
+
+  const getUser = () => {
+    getSingleProfile(postObj.uid).then(setProfileObj);
   };
 
   // Effect to determine the aspect ratio of the image once it's loaded
@@ -40,6 +47,10 @@ export default function PostCard({ postObj, onUpdate }) {
       };
     }
   }, [postObj.image]);
+
+  useEffect(() => {
+    getUser();
+  }, []);
 
   const handleClick = () => {
     router.push(`/community/comment/${postObj.firebaseKey}`);
@@ -61,9 +72,16 @@ export default function PostCard({ postObj, onUpdate }) {
       <div className="post-card">
         <h2 className="card-title">{postObj.title}</h2>
         <div className="card-header">
-          {/* <img className="avatar" src="/profile-pic.jpg" src={profileObj.image} alt="User Avatar" /> */}
+          <img
+            className="avatar"
+            src={profileObj?.image}
+            alt="User Avatar"
+            style={{
+              objectFit: 'cover',
+            }}
+          />
           <div className="user-info">
-            {/* <span className="user-name">{profileObj.name}</span> */}
+            <span className="user-name">{profileObj?.name}</span>
             {/* { !router.pathname.startsWith('/community/comment/') && (<span className="time-created">{formatDistanceToNow(new Date(postObj.timestamp), { addSuffix: true })}</span>)} */}
             {isValidDate(postObj.timestamp) && (
               <span className="time-created">
