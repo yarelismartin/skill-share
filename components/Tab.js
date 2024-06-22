@@ -15,7 +15,7 @@ export default function Tab({ children }) {
   };
 
   return (
-    <div className="tab">
+    <div className="tab pop-font">
       <div className="tab-headers">
         <div
           className={`tab-header ${activeTab === 'Bio' ? 'active' : 'hover-header'}`}

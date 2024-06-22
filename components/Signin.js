@@ -22,9 +22,11 @@ function Signin() {
       }}
     >
       <Image src="/skill-logo.png" alt="Skill Logo" width="500" height="150" />
-      <p style={{
-        fontSize: '1.5rem', textAlign: 'center', maxWidth: '500px', marginTop: '20px',
-      }}
+      <p
+        className="style-font"
+        style={{
+          fontSize: '18px', textAlign: 'center', maxWidth: '420px', marginTop: '20px',
+        }}
       >
         Let’s swap skills and grow together! Join Skill Swap today and connect with a community of passionate learners like yourself.
       </p>

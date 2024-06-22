@@ -10,7 +10,7 @@ export default function ProfileDetailCard({ profileObj }) {
   const router = useRouter();
 
   return (
-    <div className="profile-detail-body">
+    <div className="profile-detail-body pop-font">
       <div className="profile-card">
         <img src={profileObj.image} alt="profile pic" className="profile-card__image" />
         <div className="profile-card__text-container">

@@ -20,7 +20,7 @@ export default function NavBarAuth() {
           <Container style={{ display: 'flex', flexDirection: 'column' }}>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
-              <Nav className="me-auto">
+              <Nav className="me-auto" style={{ backgroundColor: 'white', display: 'flex', alignItems: 'center' }}>
                 {/* CLOSE NAVBAR ON LINK SELECTION: https://stackoverflow.com/questions/72813635/collapse-on-select-react-bootstrap-navbar-with-nextjs-not-working */}
                 <Link passHref href="/">
                   <Nav.Link>Home</Nav.Link>
@@ -29,7 +29,7 @@ export default function NavBarAuth() {
                   <Nav.Link>Discover</Nav.Link>
                 </Link>
                 <Link passHref href="/">
-                  <Image src="/skill-logo.png" alt="Skill Logo" width="200" height="50" />
+                  <Image src="/skill-logo.png" alt="Skill Logo" width="200" height="60" />
                 </Link>
                 <Link passHref href="/community">
                   <Nav.Link>Community</Nav.Link>

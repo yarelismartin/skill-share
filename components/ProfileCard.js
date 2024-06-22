@@ -8,9 +8,11 @@ export default function ProfileCard({ profileObj }) {
   const { user } = useAuth();
   const router = useRouter();
   return (
-    <div style={{
-      width: '256px', height: '327px', backgroundColor: '#D9D9D9', borderRadius: '10%', display: 'flex', alignItems: 'center', flexDirection: 'column', margin: '20px',
-    }}
+    <div
+      className="pop-font"
+      style={{
+        width: '256px', height: '327px', backgroundColor: '#D9D9D9', borderRadius: '10%', display: 'flex', alignItems: 'center', flexDirection: 'column', margin: '20px',
+      }}
     >
       <div><img
         style={{

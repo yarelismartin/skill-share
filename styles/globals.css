@@ -1,6 +1,7 @@
 @import 'bootstrap/dist/css/bootstrap.css';
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;1,300;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
 
 
 html,
@@ -377,10 +378,10 @@ a {
   --page-background: #E5E5E5;
 }
 
-body {
+/* body {
 	font-family: "Helvetica Neue", Helvetica, sans-serif;
   background-color: var(--page-background);
-}
+} */
 
 .message-container{
   margin-top: 5px;
@@ -494,4 +495,17 @@ body {
    fill: #8d38fc; 
   } */
   
+}
+
+
+.style-font {
+  font-family: "Roboto", sans-serif;
+}
+
+.jost {
+  font-family: "Jost", sans-serif;;
+}
+
+.pop-font{
+  font-family: Poppins, sans-serif;
 }
