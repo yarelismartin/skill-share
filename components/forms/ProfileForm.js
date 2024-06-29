@@ -48,8 +48,8 @@ export default function ProfileForm({ profileObj, onUpdate }) {
 
   return (
     <div>
-      <Form onSubmit={handleSubmit} className="pop-font">
-        <h2 style={{ textAlign: 'center' }}>{profileObj.firebaseKey ? 'Update Profile' : ''}</h2>
+      <Form onSubmit={handleSubmit} className="pop-font" style={{ paddingBottom: '15px' }}>
+        <h2 style={{ textAlign: 'center', marginTop: '20px' }}>{profileObj.firebaseKey ? 'Update Profile' : ''}</h2>
 
         {/* NAME INPUT  */}
         <Form.Group className="mb-3 input-form">
