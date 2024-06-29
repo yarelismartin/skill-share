@@ -78,6 +78,7 @@ export default function PostCard({ postObj, onUpdate }) {
             alt="User Avatar"
             style={{
               objectFit: 'cover',
+              marginTop: '5px',
             }}
           />
           <div className="user-info">
