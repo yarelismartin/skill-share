@@ -55,7 +55,7 @@ function Home() {
         <>
           <p style={{ fontSize: '50px' }}> Ready to swap skills and knowledge?</p>
           <p style={{ fontSize: '20px' }}>Complete your profile to connect with like-minded learners and start exchanging skills.</p>
-          <Button onClick={() => router.push('/profile/new')}>Create Profile</Button>
+          <Button onClick={() => router.push('/profile/new')} style={{ backgroundColor: 'black', border: 'none', width: '20%' }}>Create Profile</Button>
         </>
       )}
     </div>

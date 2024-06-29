@@ -33,10 +33,27 @@ export default function Menu({ categories, onSelectCategory }) {
         <p className="filter-title quick-font" style={{ fontSize: '13px', marginBottom: '5px' }}> Filter by: </p>
         <div className="filter-data">
           {categories.map((category) => (
-            <span key={category.firebaseKey} className={`filter-item quick-font ${classNameActive === category.firebaseKey ? 'filter-active' : ''}`} style={{ padding: '5px 10px', display: 'inline-block' }}>
+            <div
+              key={category.firebaseKey}
+              className={`filter-item quick-font ${classNameActive === category.firebaseKey ? 'filter-active' : ''}`}
+              style={{
+                padding: '5px 10px', display: 'inline-block', width: '100%', position: 'relative',
+              }}
+            >
               <span>{iconMapping[category.category_name]}</span>
-              <button type="button" className="filter-item" onClick={() => handleCategoryClick(category.firebaseKey)}>{category.category_name}</button>
-            </span>
+              <button
+                type="button"
+                style={{
+                  position: 'absolute',
+                  width: '80%',
+                  background: 'transparent',
+                  textAlign: 'left',
+                }}
+                className="filter-item"
+                onClick={() => handleCategoryClick(category.firebaseKey)}
+              >{category.category_name}
+              </button>
+            </div>
           ))}
           <Button className="quick-font" style={{ marginTop: '40px' }} type="button" onClick={() => { router.push('/post/new'); }}>Create A Post</Button>
         </div>
