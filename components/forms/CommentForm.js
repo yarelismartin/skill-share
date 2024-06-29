@@ -48,7 +48,7 @@ export default function CommetnForm({ getComments }) {
         <Form.Group className="input-form" style={{ marginTop: '0px' }}>
           <Form.Control
             style={{
-              border: '1.6px solid', borderColor: '#CBC9C9',
+              border: '1.6px solid', borderColor: '#CBC9C9', fontSize: '14px',
             }}
             as="textarea"
             rows={5}
@@ -61,7 +61,7 @@ export default function CommetnForm({ getComments }) {
         </Form.Group>
         <hr style={{ backgroundColor: '#CBC9C9', margin: '10px' }} />
         <div style={{ display: 'flex', justifyContent: 'flex-end', margin: '10px' }}>
-          <Button type="submit">Comment</Button>
+          <Button style={{ fontSize: '14px' }} type="submit">Comment</Button>
         </div>
       </Form>
     </div>

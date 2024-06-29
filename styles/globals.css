@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;1,300;1,400&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
 
 
 html,
@@ -12,7 +13,7 @@ body {
   /* overflow: hidden; */
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-    background-color: #E5E5E5;
+    background-color: #E5E5E5 !important;
 
 }
 /* testing color  */
@@ -188,7 +189,6 @@ a {
   padding: 10px;
   background-color: #FFFFFF;
   width: 220px; /* Adjust as needed */
-  font-family: "Roboto", sans-serif;
   font-style: normal;
   margin-bottom: -25;
 }
@@ -207,10 +207,20 @@ a {
 .filter-item {
   border: none;
   background-color: inherit;
-  font-weight: 700 ;
+  font-weight: 500;
   font-size: 14px;
   color: #000000;
+  border-radius: 10px;
+  margin-bottom: 5px;
+}
 
+.filter-item:hover {
+  background-color: #cdcccc;
+}
+
+
+.filter-active{
+  background-color: #cdcccc;
 }
 
 /* Hide scrollbar track */
@@ -272,8 +282,8 @@ a {
   color: #222;
   border-radius: 8px 8px 0px 0px;
   border-width: 1.4px !important;
-  font-family: Poppins, sans-serif;
-  font-weight: 300;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 500;
 }
 
 .hover-header:hover {
@@ -511,3 +521,6 @@ a {
 }
 
 /* font changes */
+.quick-font{
+  font-family: "Quicksand", sans-serif;
+}

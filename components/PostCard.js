@@ -69,7 +69,7 @@ export default function PostCard({ postObj, onUpdate }) {
 
   return (
     <div>
-      <div className="post-card">
+      <div className="post-card pop-font">
         <h2 className="card-title">{postObj.title}</h2>
         <div className="card-header">
           <img

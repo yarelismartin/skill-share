@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'react-bootstrap';
 import { useRouter } from 'next/router';
@@ -15,6 +15,12 @@ const iconMapping = {
 
 export default function Menu({ categories, onSelectCategory }) {
   const router = useRouter();
+  const [classNameActive, setClassNameActive] = useState(null);
+
+  const handleCategoryClick = (categoryKey) => {
+    setClassNameActive(categoryKey);
+    onSelectCategory(categoryKey);
+  };
 
   return (
     <>
@@ -24,15 +30,15 @@ export default function Menu({ categories, onSelectCategory }) {
           backgroundColor: '#f5f5f5', border: '1px solid #ddd', padding: '10px', borderRadius: '6px', marginBottom: 'auto',
         }}
       >
-        <p className="filter-title" style={{ fontSize: '13px', marginBottom: '5px' }}> MENU</p>
+        <p className="filter-title quick-font" style={{ fontSize: '13px', marginBottom: '5px' }}> Filter by: </p>
         <div className="filter-data">
           {categories.map((category) => (
-            <span key={category.firebaseKey} className="filter-item" style={{ padding: '5px 10px', display: 'inline-block' }}>
+            <span key={category.firebaseKey} className={`filter-item quick-font ${classNameActive === category.firebaseKey ? 'filter-active' : ''}`} style={{ padding: '5px 10px', display: 'inline-block' }}>
               <span>{iconMapping[category.category_name]}</span>
-              <button type="button" className="filter-item" onClick={() => onSelectCategory(category.firebaseKey)}>{category.category_name}</button>
+              <button type="button" className="filter-item" onClick={() => handleCategoryClick(category.firebaseKey)}>{category.category_name}</button>
             </span>
           ))}
-          <Button style={{ marginTop: '40px' }} type="button" onClick={() => { router.push('/post/new'); }}>Create A Post</Button>
+          <Button className="quick-font" style={{ marginTop: '40px' }} type="button" onClick={() => { router.push('/post/new'); }}>Create A Post</Button>
         </div>
       </section>
     </>

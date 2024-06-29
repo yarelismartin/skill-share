@@ -48,7 +48,7 @@ export default function ProfileForm({ profileObj, onUpdate }) {
 
   return (
     <div>
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit} className="pop-font">
         <h2 style={{ textAlign: 'center' }}>{profileObj.firebaseKey ? 'Update Profile' : ''}</h2>
 
         {/* NAME INPUT  */}

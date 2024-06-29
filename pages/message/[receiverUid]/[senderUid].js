@@ -29,7 +29,7 @@ export default function ShowMessages() {
   };
 
   return (
-    <div style={{ marginTop: '30px', paddingBottom: '30px' }}>
+    <div style={{ marginTop: '30px', paddingBottom: '30px', fontWeight: '300' }} className="pop-font">
       <div style={{
         display: 'flex', justifyContent: 'flex-end', marginTop: '30px', paddingBottom: '30px', marginRight: '40px',
       }}

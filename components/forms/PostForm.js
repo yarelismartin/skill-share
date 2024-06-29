@@ -50,7 +50,7 @@ function PostForm({ postObj }) {
 
   return (
     <div>
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit} className="pop-font">
         <h2>{postObj.firebaseKey ? 'Update' : 'Create'} Post</h2>
 
         {/* <Select Category/> */}
