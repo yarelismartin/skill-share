@@ -71,3 +71,5 @@ Menu.propTypes = {
   ).isRequired,
   onSelectCategory: PropTypes.func.isRequired,
 };
+
+// menu styling
