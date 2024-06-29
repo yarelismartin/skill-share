@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 import React, { useEffect, useRef, useState } from 'react';
-import { Form } from 'react-bootstrap';
+import { Form, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import ProfileCard from '../components/ProfileCard';
 import { getAllOtherProfiles } from '../api/profileData';
 import { useAuth } from '../utils/context/authContext';
@@ -33,13 +33,18 @@ export default function Discover() {
         <div style={{ width: '30%', maxWidth: '600px' }}>
           <br ref={sendDiscoverRef} />
           <Form className="search-bar" style={{ marginTop: '20px', marginBottom: '20px', position: 'relative' }}>
-            <Form.Control
-              type="search"
-              placeholder="Search"
-              onChange={(e) => setSearch(e.target.value)}
-              aria-label="Search"
-              style={{ width: '100%', paddingLeft: '40px', borderRadius: '20px' }}
-            />
+            <OverlayTrigger
+              placement="bottom"
+              overlay={<Tooltip id="tooltip">Search by name, skill, location, or learning preference...</Tooltip>}
+            >
+              <Form.Control
+                type="search"
+                placeholder="Search by criteria..."
+                onChange={(e) => setSearch(e.target.value)}
+                aria-label="Search"
+                style={{ width: '100%', paddingLeft: '40px', borderRadius: '20px' }}
+              />
+            </OverlayTrigger>
             <svg
               width="28"
               height="28"

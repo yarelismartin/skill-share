@@ -31,7 +31,7 @@ export default function PostDetail() {
   return (
     <div style={{ width: '100%', padding: '25px 0px' }}>
       <PostCard key={post.firebaseKey} postObj={post} onUpdate={getComments} />
-      <div className="comment-container">
+      <div className="comment-container pop-font">
         <CommetnForm getComments={getComments} />
         {comments.map((comment) => (
           <CommentCard key={comment.firebaseKey} commentObj={comment} onUpdate={getComments} />

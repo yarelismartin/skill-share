@@ -41,6 +41,7 @@ export default function MessageForm({ messageObj, onUpdate }) {
   return (
     <>
       <Form
+        className="pop-font"
         style={{
           color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'flex-end',
         }}
@@ -51,7 +52,7 @@ export default function MessageForm({ messageObj, onUpdate }) {
             <Form.Control
               type="text"
               style={{
-                borderRadius: '15px', width: '700px', marginRight: '10px', padding: '5px 15px',
+                borderRadius: '15px', width: '700px', marginRight: '10px', padding: '5px 15px', fontWeight: '200',
               }}
               placeholder="Type your message here..."
               name="message"
@@ -60,7 +61,7 @@ export default function MessageForm({ messageObj, onUpdate }) {
               autoComplete="off"
             />
           </Form.Group>
-          <Button className="message-btn" variant="primary" type="submit">
+          <Button style={{ fontWeight: '200' }} className="message-btn" variant="primary" type="submit">
             Send
           </Button>
         </div>

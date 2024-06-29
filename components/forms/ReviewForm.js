@@ -44,11 +44,11 @@ export default function ReviewForm({ getReviews }) {
       width: '80%', border: '1px solid', margin: '20px auto', padding: '15px', borderRadius: '10px', borderColor: '#0089FF',
     }}
     >
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit} className="pop-font">
         <Form.Group className="input-form" style={{ marginTop: '0px' }}>
           <Form.Control
             style={{
-              border: '1.6px solid', borderColor: '#CBC9C9',
+              border: '1.6px solid', borderColor: '#CBC9C9', fontSize: '14px',
             }}
             as="textarea"
             rows={5}
@@ -61,7 +61,7 @@ export default function ReviewForm({ getReviews }) {
         </Form.Group>
         <hr style={{ backgroundColor: '#CBC9C9', margin: '10px' }} />
         <div style={{ display: 'flex', justifyContent: 'flex-end', margin: '10px' }}>
-          <Button type="submit">Review</Button>
+          <Button style={{ fontSize: '14px' }} type="submit">Review</Button>
         </div>
       </Form>
     </div>
