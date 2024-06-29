@@ -57,6 +57,7 @@ Skill Swap is a community platform that empowers individuals to exchange skills 
 - Next.js
 - React Bootstrap
 - CSS
+- Firebase
 
 ## Contributors
 - [Yarelis Martin](https://github.com/your-github-url)
