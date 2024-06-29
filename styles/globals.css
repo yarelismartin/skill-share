@@ -49,7 +49,7 @@ a {
 .card-header {
   display: flex;
   align-items: center;
-  margin: 16px 0px !important;
+  margin: 16px 0 5px 0 !important;
   position: relative;
 }
 
