@@ -1,8 +1,12 @@
 @import 'bootstrap/dist/css/bootstrap.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;1,300;1,400&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+
 
 
 html,
@@ -172,56 +176,63 @@ a {
 /* styling for the whole product list container, including the filters on the side */
 .product-list-container {
   display: flex;
-  height: 80vh; 
+  height: 90vh; 
+  padding-bottom: 5px;
+  flex-direction: column;
+  align-items: center;
+}
+
+.community-filter-menu{
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 15px;
 }
 
 
 .products-container {
-  flex: 1;
   overflow-y: auto; /* Enable scrolling for the content area */
-  height: 87vh;
+  height: 79vh;
+  padding-right: 10px;
 }
+
+#dropdown-item-button {
+  background-color: var(--send-bg);
+  border-radius: 20px !important;
+  border: 3px solid; /* Adjust the color and transparency as needed */
+  border-color: rgba(236, 236, 236, 0.5);
+  margin-bottom: 10px;
+  
+  &:hover {
+    border-color: rgba(156, 156, 156, 0.5); /* Slightly darker or more visible border on hover */
+  }
+
+}
+
+.create-post-button{
+  margin-right: 5px;
+  background-color: #0d6efd !important;
+}
+.create-post-form{
+  padding: 0 10px;
+}
+.dropdown-menu.show {
+  border-radius: 15px !important;
+}
+
+.drop-down-filter{
+  display: flex;
+  justify-content: flex-end;
+  max-width: 700px;
+}
+
 
 
 
 /* styling for the filters */
-.filter-wrapper {
-  padding: 10px;
-  background-color: #FFFFFF;
-  width: 220px; /* Adjust as needed */
-  font-style: normal;
-  margin-bottom: -25;
-}
-
-.filter-title {
-  font-weight: 700;
-  color: #808080;
-}
-
-.filter-data {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-}
-
-.filter-item {
-  border: none;
-  background-color: inherit;
-  font-weight: 500;
-  font-size: 14px;
-  color: #000000;
-  border-radius: 10px;
-  margin-bottom: 5px;
-  cursor: pointer;
-}
-
-.filter-item:hover {
-  background-color: #cdcccc;
-}
-
-
-.filter-active{
-  background-color: #cdcccc;
+.dropdown-item:hover, 
+.dropdown-item:focus {
+    background-color: #a968ff !important;
+    color: white !important; /* Optional: Change the text color */
 }
 
 /* Hide scrollbar track */
@@ -502,9 +513,6 @@ a {
 
 .comment-icon:hover {
   transform: scale(1.1);
-  /* path {
-   fill: #8d38fc; 
-  } */
   
 }
 
@@ -524,4 +532,143 @@ a {
 /* font changes */
 .quick-font{
   font-family: "Quicksand", sans-serif;
+}
+
+
+
+
+.navbar-brand{
+  padding-left: 0px;
+  
+}
+
+.container{
+  margin: 0 auto;
+  /* container doesn't stretch beyond 107rem even if the screen size is larger. */
+  max-width: 107rem;
+  padding: 0;
+}
+
+.navbar-custom{
+  box-shadow: 0 0 10px rgba(0, 0, 0, .09);
+
+}
+
+@media (max-width: 900px) {
+  .search{
+    width: 100% ;
+  }
+  .search-div{
+    width: 60% !important;
+  }
+  .search-bar{
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+
+    input{
+      font-size: 13px;
+    }
+}
+.profile-card__bio-content p {
+  font-size: 13px;
+}
+
+.profile-img-flex{
+  display: flex;
+  margin-bottom: 15px;
+}
+
+.profile-left{
+  display: flex;
+  flex-direction: column;
+}
+
+.message-div{
+  width: 100% !important;
+
+}
+}
+
+@media (max-width: 900px) {
+  .navbar-custom .navbar-logo {
+    display: none;
+  }
+  .navbar-custom .navbar-collapse {
+    flex-grow: 1;
+
+  }
+  .navbar-nav{
+      margin: auto ;
+  }
+}
+
+
+@media (max-width: 1000px){
+  .nav-container{
+    margin: 0;
+  }
+  /* Profile detail */
+  .tab{
+    width: 70%;
+  }
+
+}
+
+
+@media (max-width: 780px) {
+  .welcome{
+    padding: 0;
+  }
+  .welcome h1 {
+    font-size: 40px !important;
+  }
+  .welcome p {
+    font-size: 20px !important;
+    padding: 0 20px;
+  }
+  .community-filter-menu{
+    margin-right: 10px;
+  }
+}
+
+
+@media (max-width: 433px) {
+  .welcome{
+    padding: 0 5px;
+  }
+  .welcome h1 {
+    font-size: 40px !important;
+  }
+  .welcome p {
+    font-size: 20px !important;
+    padding: 0 12px;
+  }
+}
+
+@media (max-width: 577px){
+  .welcome h1{
+    display: flex;
+    flex-direction: column;
+  }
+
+    /* Profile detail */
+    .tab{
+      width: 90%;
+    }
+    .comment-container{
+      width: 95%;
+    }
+    .post-card{
+      width: 95%;
+    }
+.message-container{
+  padding: 10px;
+}
+
+.message-form{
+  padding: 0 !important;
+}
+
+
 }

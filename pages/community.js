@@ -49,19 +49,19 @@ export default function Community() {
 
   return (
     <>
-      <br />
-
       <div className="product-list-container">
+        <div>
 
-        <Menu categories={category} onSelectCategory={setSelectedCategory} />
-        <section className="products-container">
-          <div style={{ display: 'flex', flexDirection: 'column' }}>
-            {posts.map((post) => (
-              <PostCard key={post.firebaseKey} postObj={post} onUpdate={postByCategory} />
-            ))}
-          </div>
-        </section>
+          <Menu categories={category} onSelectCategory={setSelectedCategory} />
+          <section className="products-container">
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+              {posts.map((post) => (
+                <PostCard key={post.firebaseKey} postObj={post} onUpdate={postByCategory} />
+              ))}
+            </div>
+          </section>
 
+        </div>
       </div>
     </>
   );

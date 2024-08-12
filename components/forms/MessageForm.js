@@ -47,12 +47,17 @@ export default function MessageForm({ messageObj, onUpdate }) {
         }}
         onSubmit={handleSubmit}
       >
-        <div style={{ display: 'flex', alignItems: 'flex-start', padding: '10px 40px' }}>
-          <Form.Group className="mb-3" style={{ flexGrow: 1, marginBottom: '0' }}>
+        <div
+          className="message-form"
+          style={{
+            display: 'flex', alignItems: 'flex-start', padding: '10px 40px', width: '100%',
+          }}
+        >
+          <Form.Group className="mb-3" style={{ flexGrow: 1, marginBottom: '0', marginRight: '5px' }}>
             <Form.Control
               type="text"
               style={{
-                borderRadius: '15px', width: '700px', marginRight: '10px', padding: '5px 15px', fontWeight: '200',
+                borderRadius: '15px', width: '100%', marginRight: '10px', padding: '5px 15px', fontWeight: '200',
               }}
               placeholder="Type your message here..."
               name="message"

@@ -9,7 +9,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <Head>
-        <title>Skill Share</title>
+        <title>Skill Swap</title>
       </Head>
 
       {/* TODO: Delete NoAuth component above and comment in code below for authentication */}

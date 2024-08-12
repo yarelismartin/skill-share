@@ -4,18 +4,12 @@ import { useEffect, useState } from 'react';
 import { useAuth } from '../utils/context/authContext'; // TODO: COMMENT IN FOR AUTH
 import { useProfile } from '../utils/context/ProfileProvider';
 import { getSingleProfile } from '../api/profileData';
-// import useProfileCheck from '../utils/hooks/useProfileCheck';
 
 function Home() {
   const { user } = useAuth(); // TODO: COMMENT IN FOR AUTH
   const router = useRouter();
-  // const userHasProfile = useProfileCheck();
   const { userHasProfile } = useProfile();
   const [userInfo, setUserInfo] = useState();
-
-  // const getName = () => {
-  //   getSingleProfile(user.uid).then(setUserInfo);
-  // };
 
   useEffect(() => {
     let isComponentUnmounted = false;
@@ -33,12 +27,10 @@ function Home() {
       isComponentUnmounted = true; // Set flag to true when component unmounts
     };
   }, [user.uid]);
-  // useEffect(() => {
-  // }, [userHasProfile]);
 
   return (
     <div
-      className="text-center d-flex flex-column justify-content-center align-content-center jost"
+      className="text-center d-flex flex-column justify-content-center align-content-center jost welcome"
       style={{
         height: '90vh',
         padding: '30px',
@@ -48,7 +40,12 @@ function Home() {
     >
       { userHasProfile ? (
         <>
-          <h1 style={{ fontSize: '50px' }}>Welcome back {userInfo?.name}! </h1>
+          <div className="welcome-h1">
+            <h1 style={{ fontSize: '50px' }}>
+              <span>Welcome back </span>
+              <strong> {userInfo?.name}!</strong>
+            </h1>
+          </div>
           <p style={{ fontSize: '20px' }}> We are thrilled to have you return to our community of knowledge sharers. Ready to pick up where you left off and explore even more skill-swapping opportunities?</p>
         </>
       ) : (
