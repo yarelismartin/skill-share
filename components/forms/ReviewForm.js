@@ -41,7 +41,7 @@ export default function ReviewForm({ getReviews }) {
 
   return (
     <div style={{
-      width: '80%', border: '1px solid', margin: '20px auto', padding: '15px', borderRadius: '10px', borderColor: '#0089FF',
+      border: '1px solid', margin: '20px auto', padding: '15px', borderRadius: '10px', borderColor: '#0089FF',
     }}
     >
       <Form onSubmit={handleSubmit} className="pop-font">

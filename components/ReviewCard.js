@@ -29,7 +29,7 @@ export default function ReviewCard({ reviewObj, onUpdate }) {
 
   return (
     <div>
-      <Card className="pop-font" style={{ width: '18rem', margin: '15px auto', boxShadow: ' 0 2px 4px rgba(0, 0, 0, 0.1)' }}>
+      <Card className="pop-font review-card" style={{ margin: '15px auto', boxShadow: ' 0 2px 4px rgba(0, 0, 0, 0.1)' }}>
         <Card.Body>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             <div style={{ display: 'flex', alignItems: 'center' }}>

@@ -11,6 +11,7 @@ export default function ShowMessages() {
   const { receiverUid, senderUid } = router.query;
   const [messageDetails, setMessageDetails] = useState({});
   const [newMessage, setNewMessage] = useState({});
+  const [isMobileView, setIsMobileView] = useState(false);
   const sendMessageRef = useRef(null);
 
   const getMessageDetails = () => {
@@ -22,6 +23,18 @@ export default function ShowMessages() {
     getMessageDetails();
   }, []);
 
+  // Effect to handle screen width changes
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobileView(window.innerWidth >= 768); // Adjust the width threshold as needed
+    };
+
+    handleResize(); // Check the width on initial render
+    window.addEventListener('resize', handleResize); // Listen for window resize events
+
+    return () => window.removeEventListener('resize', handleResize); // Cleanup the event listener
+  }, []);
+
   const handleScroll = () => {
     if (typeof window !== 'undefined') {
       sendMessageRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
@@ -29,29 +42,31 @@ export default function ShowMessages() {
   };
 
   return (
-    <div style={{ marginTop: '30px', paddingBottom: '30px', fontWeight: '300' }} className="pop-font">
-      <div style={{
-        display: 'flex', justifyContent: 'flex-end', marginTop: '30px', paddingBottom: '30px', marginRight: '40px',
-      }}
-      >
-        <button aria-label="scroll-to-send" type="button" onClick={handleScroll} style={{ border: 'none', backgroundColor: 'inherit' }}>
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="scroll-down">
-            <circle cx="12" cy="12" r="8" transform="rotate(90 12 12)" stroke="black" strokeWidth="1.00088" strokeLinejoin="round" />
-            <path d="M15.75 10.25C14.1879 11.8121 13.3121 12.6879 11.75 14.25L7.75 10.25" stroke="black" strokeWidth="1.00088" strokeLinejoin="round" />
-          </svg>
-        </button>
-      </div>
+    <div style={{ padding: '30px', fontWeight: '300' }} className="pop-font message-container">
+      {isMobileView && (
+        <div style={{
+          display: 'flex', justifyContent: 'flex-end', paddingBottom: '30px', marginRight: '40px',
+        }}
+        >
+          <button aria-label="scroll-to-send" type="button" onClick={handleScroll} style={{ border: 'none', backgroundColor: 'inherit' }}>
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="scroll-down">
+              <circle cx="12" cy="12" r="8" transform="rotate(90 12 12)" stroke="black" strokeWidth="1.00088" strokeLinejoin="round" />
+              <path d="M15.75 10.25C14.1879 11.8121 13.3121 12.6879 11.75 14.25L7.75 10.25" stroke="black" strokeWidth="1.00088" strokeLinejoin="round" />
+            </svg>
+          </button>
+        </div>
+      )}
 
       <div className="profile-left" style={{ display: 'flex', justifyContent: 'space-between' }}>
-
-        <img src={messageDetails?.receiver?.image} alt="profile pic" className="profile-card__image" />
-        <div className="profile-card__text-container">
-          <h2 className="profile-card__name">{messageDetails?.receiver?.name.split(' ')[0]}</h2>
-          <p className="profile-card__skill">{messageDetails?.receiver?.skill}</p>
-          <p className="profile-card__location">{messageDetails?.receiver?.location}</p>
+        <div className="profile-img-flex">
+          <img src={messageDetails?.receiver?.image} alt="profile pic" className="profile-card__image" />
+          <div className="profile-card__text-container">
+            <h2 className="profile-card__name">{messageDetails?.receiver?.name.split(' ')[0]}</h2>
+            <p className="profile-card__skill">{messageDetails?.receiver?.skill}</p>
+            <p className="profile-card__location">{messageDetails?.receiver?.location}</p>
+          </div>
         </div>
-
-        <div style={{ display: 'flex', flexDirection: 'column', width: '80%' }}>
+        <div className="message-div" style={{ display: 'flex', flexDirection: 'column', width: '80%' }}>
           {messageDetails?.messages?.sort((a, b) => new Date(a.dateSent) - new Date(b.dateSent)).map((mes) => (
             <div key={mes.firebaseKey} className="message-container">
               <div>
@@ -63,6 +78,7 @@ export default function ShowMessages() {
               </div>
             </div>
           ))}
+
           <br />
           <MessageForm messageObj={newMessage} onUpdate={getMessageDetails} />
           <br ref={sendMessageRef} />

@@ -46,11 +46,12 @@ function PostForm({ postObj }) {
   useEffect(() => {
     getAllCategories();
     if (postObj?.firebaseKey) setFormInput(postObj);
-  }, [postObj]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div>
-      <Form onSubmit={handleSubmit} className="pop-font">
+      <Form onSubmit={handleSubmit} className="pop-font create-post-form">
         <h2 style={{ marginTop: '20px' }}>{postObj.firebaseKey ? 'Update' : 'Create'} Post</h2>
 
         {/* <Select Category/> */}
