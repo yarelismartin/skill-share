@@ -47,7 +47,7 @@ export default function ProfileForm({ profileObj, onUpdate }) {
   }, [profileObj]);
 
   return (
-    <div>
+    <div className="form-container">
       <Form onSubmit={handleSubmit} className="pop-font" style={{ paddingBottom: '15px' }}>
         <h2 style={{ textAlign: 'center', marginTop: '20px' }}>{profileObj.firebaseKey ? 'Update Profile' : ''}</h2>
 
