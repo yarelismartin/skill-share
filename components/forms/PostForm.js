@@ -50,9 +50,9 @@ function PostForm({ postObj }) {
   }, []);
 
   return (
-    <div>
+    <div className="form-container">
       <Form onSubmit={handleSubmit} className="pop-font create-post-form">
-        <h2 style={{ marginTop: '20px' }}>{postObj.firebaseKey ? 'Update' : 'Create'} Post</h2>
+        <h2 style={{ marginTop: '20px', textAlign: 'center' }}>{postObj.firebaseKey ? 'Update' : 'Create'} Post</h2>
 
         {/* <Select Category/> */}
         <Form.Group className="input-form">
@@ -108,14 +108,15 @@ function PostForm({ postObj }) {
             onChange={handleChange}
           />
         </Form.Group>
-
-        <Button style={{ marginTop: '15px' }} type="submit">
-          <svg style={{ marginRight: '8px' }} width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M11.9167 1.58334L5.95834 7.54168" stroke="white" strokeLinecap="round" strokeLinejoin="round" />
-            <path d="M11.9167 1.58334L8.125 12.4167L5.95834 7.54168L1.08334 5.37501L11.9167 1.58334Z" stroke="white" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-          {postObj.firebaseKey ? 'Update' : ''} Post
-        </Button>
+        <div className="post-btn-container">
+          <Button style={{ marginTop: '15px' }} type="submit">
+            <svg style={{ marginRight: '8px' }} width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M11.9167 1.58334L5.95834 7.54168" stroke="white" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M11.9167 1.58334L8.125 12.4167L5.95834 7.54168L1.08334 5.37501L11.9167 1.58334Z" stroke="white" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+            {postObj.firebaseKey ? 'Update' : ''} Post
+          </Button>
+        </div>
       </Form>
     </div>
   );
