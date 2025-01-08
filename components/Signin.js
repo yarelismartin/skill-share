@@ -21,7 +21,7 @@ function Signin() {
         margin: '0 auto',
       }}
     >
-      <Image src="/skill-logo.png" classname="login-skill-logo" alt="Skill Logo" width="500px" height="150" />
+      <Image src="/skill-logo.png" className="login-skill-logo" alt="Skill Logo" width="500px" height="150" />
       <p
         className="style-font login-text"
         style={{

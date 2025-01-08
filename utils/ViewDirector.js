@@ -19,7 +19,7 @@ const ViewDirectorBasedOnUserAuthStatus = ({ component: Component, pageProps }) 
       <ProfileProvider>
         <>
           <NavBarAuth /> {/* NavBar only visible if user is logged in and is in every view */}
-          <div className="container">
+          <div className="container mx-auto">
             <Component {...pageProps} />
           </div>
         </>

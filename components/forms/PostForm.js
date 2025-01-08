@@ -47,7 +47,7 @@ function PostForm({ postObj }) {
     getAllCategories();
     if (postObj?.firebaseKey) setFormInput(postObj);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [postObj]);
 
   return (
     <div className="form-container">

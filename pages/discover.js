@@ -39,7 +39,7 @@ export default function Discover() {
                 <Form.Control
                   type="search"
                   placeholder="Search by criteria..."
-                  onChange={(e) => setSearch(e.target.value)}
+                  onChange={(e) => setSearch(e.target.value.toLowerCase())}
                   aria-label="Search"
                   style={{ width: '100%', paddingLeft: '40px', borderRadius: '20px' }}
                 />

@@ -29,28 +29,55 @@ export default function PostCard({ postObj, onUpdate }) {
     }
   };
 
-  const getUser = () => {
-    getSingleProfile(postObj.uid).then(setProfileObj);
-  };
-
   // Effect to determine the aspect ratio of the image once it's loaded
   useEffect(() => {
-    if (imageRef.current) { // Check if the imageRef is attached to an image element(imageRef.current is not null.)
-      const img = imageRef.current; // imageRef.current now points to the actual DOM element rendered by the <img> tag.
-      img.onload = () => { // The onload event fires when the image has completely loaded, meaning all image data is available.
+    if (imageRef.current) {
+      // imageRef.current now refers to the actual DOM element rendered by the <img> tag.
+      const img = imageRef.current;
+
+      // Define a handler for the 'onload' event. This ensures the logic is encapsulated and can be cleaned up later.
+      const handleLoad = () => {
+        // Calculate the aspect ratio of the image.
         const aspectRatio = img.naturalWidth / img.naturalHeight;
-        if (aspectRatio > 1) { // If the aspect ratio is greater than 1, the image is wider than it is tall (horizontal).
-          setImageClass('horizontal');
+
+        // Determine if the image is horizontal or vertical based on its aspect ratio.
+        if (aspectRatio > 1) {
+          setImageClass('horizontal'); // Horizontal image (wider than tall).
         } else {
-          setImageClass('vertical'); // If the aspect ratio is less than or equal to 1, the image is as tall or taller than it is wide (vertical).
+          setImageClass('vertical'); // Vertical image (taller or square).
         }
       };
+
+      // Assign the onload event handler to the image.
+      img.onload = handleLoad;
+
+      // Cleanup function to remove the onload handler when the component unmounts or dependencies change.
+      return () => {
+        img.onload = null; // Prevent memory leaks by clearing the handler.
+      };
     }
+
+    // Explicitly return undefined if imageRef.current is null or undefined.
+    return undefined;
   }, [postObj.image]);
 
   useEffect(() => {
+    let isMounted = true;
+
+    const getUser = () => {
+      getSingleProfile(postObj.uid).then((profileData) => {
+        if (isMounted) {
+          setProfileObj(profileData);
+        }
+      });
+    };
+
     getUser();
-  }, []);
+
+    return () => {
+      isMounted = false; // Cleanup to prevent state updates after unmount
+    };
+  }, [postObj.uid]);
 
   const handleClick = () => {
     router.push(`/community/comment/${postObj.firebaseKey}`);
@@ -83,7 +110,6 @@ export default function PostCard({ postObj, onUpdate }) {
           />
           <div className="user-info">
             <span className="user-name">{profileObj?.name}</span>
-            {/* { !router.pathname.startsWith('/community/comment/') && (<span className="time-created">{formatDistanceToNow(new Date(postObj.timestamp), { addSuffix: true })}</span>)} */}
             {isValidDate(postObj.timestamp) && (
               <span className="time-created">
                 {formatDistanceToNow(new Date(postObj.timestamp), { addSuffix: true })}

@@ -42,8 +42,7 @@ function Home() {
         <>
           <div className="welcome-h1">
             <h1 style={{ fontSize: '50px' }}>
-              <span>Welcome back </span>
-              <strong> {userInfo?.name}!</strong>
+              <span>Welcome back {userInfo?.name}!</span>
             </h1>
           </div>
           <p style={{ fontSize: '20px' }}> We are thrilled to have you return to our community of knowledge sharers. Ready to pick up where you left off and explore even more skill-swapping opportunities?</p>
